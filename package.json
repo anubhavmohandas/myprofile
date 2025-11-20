@@ -1,7 +1,36 @@
 {
+  "name": "anubhav-portfolio",
+  "version": "1.0.0",
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "main": "eslint.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anubhavmohandas/myprofile.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/anubhavmohandas/myprofile/issues"
+  },
+  "homepage": "https://github.com/anubhavmohandas/myprofile#readme",
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
   "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.1",
     "autoprefixer": "^10.4.22",
+    "eslint": "^9.39.1",
     "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.17"
+    "tailwindcss": "^3.4.18",
+    "vite": "^7.2.4"
   }
 }

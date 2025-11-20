@@ -1,16 +1,47 @@
-# React + Vite
+# Anubhav Mohandas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Cybersecurity & Digital Forensics Researcher**
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 👋 About
 
-## React Compiler
+I'm interested in **cybersecurity** and **digital forensics**, with a focus on investigating cyber crimes and understanding how digital threats work. Currently exploring different areas of security research and building my skills.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🔍 **Interests:**
+- Cyber Crime Investigation
+- Digital Forensics
+- Security Research
+- Open Source Security Tools
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tools & Technologies
+
+Working with:
+- **OS:** Kali Linux, Windows, Ubuntu
+- **Forensics:** Autopsy, FTK
+- **Security:** Burp Suite, Metasploit, Wireshark
+- **Scripting:** Python, Bash
+
+---
+
+## 🚀 Projects
+
+Some security tools and research projects I'm working on:
+
+- [Recon Scanner](https://github.com/anubhavmohandas/recon_scanner) - Reconnaissance tool
+- [Digital Forensics Toolkit](https://github.com/anubhavmohandas/Ultimate-Digital-Forensics-Toolkit) - Collection of forensics utilities
+- [CVSS Calculator](https://github.com/anubhavmohandas/Enhanced-CVSS-Calculator) - Vulnerability scoring tool
+
+---
+
+## 📫 Connect
+
+- 💼 [LinkedIn](https://linkedin.com/in/anubhavmohandas)
+- 🐦 [Twitter](https://x.com/anubhavmohandas)
+- 📧 anubhav.manav147@gmail.com
+
+---
+
+**Portfolio:** [anubhavmohandass.netlify.app](https://anubhavmohandass.netlify.app)

@@ -9,17 +9,50 @@ const Portfolio = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [showCharacter, setShowCharacter] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [konamiActive, setKonamiActive] = useState(false);
   
   const trailPositions = useRef(Array(8).fill({ x: 0, y: 0 }));
+  const konamiCode = useRef([]);
+  const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
 
   const messages = useMemo(() => ({
     home: "Welcome! I'm your cyber guide! Ready to explore?",
-    about: "Discover Anubhav's cybersecurity expertise!",
-    tools: "Check out these amazing security tools!",
-    experience: "Look at this impressive journey in security!",
-    projects: "Amazing security projects and tools ahead!",
+    about: "Discover Anubhav's cybersecurity research & tool development!",
+    tools: "Check out these powerful security tools!",
+    experience: "Look at this impressive research & development journey!",
+    projects: "Amazing security tools and research projects ahead!",
     contact: "Ready to connect? Let's secure the world together!"
   }), []);
+
+  // Konami Code Detection
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      konamiCode.current.push(e.key);
+      if (konamiCode.current.length > 10) {
+        konamiCode.current.shift();
+      }
+      
+      const currentSequence = konamiCode.current.join(',');
+      const targetSequence = konamiSequence.join(',');
+      
+      if (currentSequence === targetSequence) {
+        setKonamiActive(true);
+        setBubbleMessage("🌈 Rainbow Mode Activated! You found the secret!");
+        setShowBubble(true);
+        setCharacterMood('excited');
+        
+        setTimeout(() => {
+          setKonamiActive(false);
+          setShowBubble(false);
+          setCharacterMood('idle');
+          konamiCode.current = [];
+        }, 10000);
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, []);
 
   // Detect mobile
   useEffect(() => {
@@ -127,7 +160,7 @@ const Portfolio = () => {
   }, []);
 
   const handleCharacterClick = useCallback(() => {
-    setBubbleMessage("Hi there! Scroll to explore Anubhav's amazing cybersecurity portfolio!");
+    setBubbleMessage("Hi there! Scroll to explore Anubhav's cybersecurity research & tool development portfolio!");
     setShowBubble(true);
     setCharacterMood('excited');
     setTimeout(() => {
@@ -149,6 +182,16 @@ const Portfolio = () => {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden relative">
+      {/* Konami Rainbow Overlay */}
+      {konamiActive && (
+        <div 
+          className="fixed inset-0 pointer-events-none z-[9999]"
+          style={{
+            animation: 'rainbowGlow 2s ease-in-out infinite',
+            mixBlendMode: 'screen'
+          }}
+        />
+      )}
       <style>{`
         /* Advanced Animations from Original CSS */
         @keyframes ripple {
@@ -211,6 +254,16 @@ const Portfolio = () => {
                         radial-gradient(circle at 90% 60%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
                         #0a0a0a;
           }
+        }
+        @keyframes rainbowGlow {
+          0% { box-shadow: 0 0 50px #ff0000, 0 0 100px #ff0000, inset 0 0 50px rgba(255, 0, 0, 0.2); }
+          14% { box-shadow: 0 0 50px #ff7f00, 0 0 100px #ff7f00, inset 0 0 50px rgba(255, 127, 0, 0.2); }
+          28% { box-shadow: 0 0 50px #ffff00, 0 0 100px #ffff00, inset 0 0 50px rgba(255, 255, 0, 0.2); }
+          42% { box-shadow: 0 0 50px #00ff00, 0 0 100px #00ff00, inset 0 0 50px rgba(0, 255, 0, 0.2); }
+          56% { box-shadow: 0 0 50px #0000ff, 0 0 100px #0000ff, inset 0 0 50px rgba(0, 0, 255, 0.2); }
+          70% { box-shadow: 0 0 50px #4b0082, 0 0 100px #4b0082, inset 0 0 50px rgba(75, 0, 130, 0.2); }
+          84% { box-shadow: 0 0 50px #9400d3, 0 0 100px #9400d3, inset 0 0 50px rgba(148, 0, 211, 0.2); }
+          100% { box-shadow: 0 0 50px #ff0000, 0 0 100px #ff0000, inset 0 0 50px rgba(255, 0, 0, 0.2); }
         }
         @keyframes characterIdle {
           0%, 100% { transform: translateY(0px); }
@@ -278,6 +331,11 @@ const Portfolio = () => {
           body { cursor: auto; }
         }
         
+        /* Konami Code Rainbow Effect */
+        .konami-active {
+          animation: rainbowGlow 2s ease-in-out infinite !important;
+        }
+        
         /* Character Guide Styles */
         .character-guide {
           animation: characterIdle 3s ease-in-out infinite;
@@ -305,6 +363,19 @@ const Portfolio = () => {
         }
         .character-leg-right {
           animation: legWalk 1.2s ease-in-out infinite 0.6s;
+        }
+        
+        /* Mobile Improvements */
+        @media (max-width: 768px) {
+          .mobile-padding { padding: 1rem !important; }
+          .mobile-text-sm { font-size: 0.875rem !important; }
+          .mobile-text-base { font-size: 1rem !important; }
+          .mobile-text-lg { font-size: 1.25rem !important; }
+          .mobile-text-xl { font-size: 1.5rem !important; }
+          .mobile-text-2xl { font-size: 1.75rem !important; }
+          .mobile-text-3xl { font-size: 2rem !important; }
+          .mobile-gap-4 { gap: 1rem !important; }
+          .mobile-mb-8 { margin-bottom: 2rem !important; }
         }
       `}</style>
 
@@ -450,13 +521,14 @@ const Portfolio = () => {
           ? 'glass shadow-[0_4px_30px_rgba(0,212,255,0.25)] border-b border-cyan-400/40' 
           : 'bg-black/95 border-b border-cyan-400/15'
       }`}>
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
           <div 
-            className="text-2xl font-bold gradient-text cursor-pointer flex items-center gap-3 hover:scale-105 transition-transform"
+            className="text-xl md:text-2xl font-bold gradient-text cursor-pointer flex items-center gap-2 md:gap-3 hover:scale-105 transition-transform"
             onClick={() => document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            <i className="fas fa-user-secret text-3xl" style={{ color: '#00d4ff' }}></i>
-            Anubhav Mohandas
+            <i className="fas fa-user-secret text-2xl md:text-3xl" style={{ color: '#00d4ff' }}></i>
+            <span className="hidden sm:inline">Anubhav Mohandas</span>
+            <span className="sm:hidden">AM</span>
           </div>
           
           {/* Desktop Nav */}
@@ -472,7 +544,7 @@ const Portfolio = () => {
               <li key={href}>
                 <a
                   href={`#${href}`}
-                  className={`px-4 py-2 rounded-xl font-medium transition-all hover:text-cyan-400 hover:bg-cyan-400/10 flex items-center gap-2 ${
+                  className={`px-3 lg:px-4 py-2 rounded-xl font-medium transition-all hover:text-cyan-400 hover:bg-cyan-400/10 flex items-center gap-2 text-sm lg:text-base ${
                     currentSection === href ? 'text-cyan-400 bg-cyan-400/10 border border-cyan-400/30' : 'border border-transparent'
                   }`}
                 >
@@ -484,7 +556,7 @@ const Portfolio = () => {
 
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden text-3xl"
+            className="md:hidden text-2xl md:text-3xl"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? '✕' : '☰'}
@@ -516,9 +588,9 @@ const Portfolio = () => {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center text-center px-6 pt-20">
+      <section id="home" className="min-h-screen flex items-center justify-center text-center px-4 md:px-6 pt-20">
         <div className="max-w-4xl">
-          <div className="flex justify-center gap-8 mb-8">
+          <div className="flex justify-center gap-4 md:gap-8 mb-6 md:mb-8">
             {[
               { icon: 'fa-user-secret', delay: '0s' },
               { icon: 'fa-shield-halved', delay: '0.5s' },
@@ -526,7 +598,7 @@ const Portfolio = () => {
             ].map((item, i) => (
               <i 
                 key={i} 
-                className={`fas ${item.icon} text-6xl text-cyan-400 hover:scale-125 hover:text-white transition-transform cursor-pointer`}
+                className={`fas ${item.icon} text-4xl md:text-6xl text-cyan-400 hover:scale-125 hover:text-white transition-transform cursor-pointer`}
                 style={{ 
                   animation: 'iconFloat 4s ease-in-out infinite',
                   animationDelay: item.delay,
@@ -537,7 +609,7 @@ const Portfolio = () => {
           </div>
           
           <h1 
-            className="text-5xl md:text-7xl font-bold gradient-text mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold gradient-text mb-4 md:mb-6"
             style={{ 
               animation: 'titleGlow 4s ease-in-out infinite alternate, iconFloat 6s ease-in-out infinite',
               willChange: 'filter, text-shadow'
@@ -546,39 +618,39 @@ const Portfolio = () => {
             Anubhav Mohandas
           </h1>
           
-          <p className="text-2xl md:text-3xl text-cyan-400 mb-4 flex items-center justify-center gap-3" style={{ textShadow: '0 0 10px rgba(0, 212, 255, 0.5)' }}>
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-cyan-400 mb-3 md:mb-4 flex items-center justify-center gap-2 md:gap-3 flex-wrap px-4" style={{ textShadow: '0 0 10px rgba(0, 212, 255, 0.5)' }}>
             <i className="fas fa-shield-virus"></i>
-            Cybersecurity Professional & Digital Forensics Specialist
+            <span className="text-center">Cybersecurity Researcher & Tool Developer</span>
           </p>
           
-          <p className="text-lg md:text-xl text-gray-400 mb-3 flex items-center justify-center gap-2">
+          <p className="text-base md:text-lg lg:text-xl text-gray-400 mb-2 md:mb-3 flex items-center justify-center gap-2">
             <i className="fas fa-location-dot"></i>
-            Making the Digital World Safer
+            Digital Forensics & Cyber Crime Investigation Specialist
           </p>
           
-          <p className="text-lg md:text-xl text-gray-300 mb-12 leading-relaxed max-w-3xl mx-auto">
-            Passionate about making the digital world safer through cyber forensics research, 
-            threat analysis, and innovative security solutions. Driven by curiosity and committed 
-            to excellence in cybersecurity.
+          <p className="text-base md:text-lg lg:text-xl text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto px-4">
+            Passionate cybersecurity researcher and tool developer specializing in cyber crime investigation and digital forensics. 
+            I love solving complex cases using advanced investigative techniques, developing security tools, and exploring 
+            innovative methodologies. Always learning and pushing the boundaries of what's possible in cybersecurity.
           </p>
           
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 md:gap-6 px-4">
             <a 
               href="#projects" 
-              className="relative px-8 py-4 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-full font-bold text-lg shadow-[0_6px_20px_rgba(0,212,255,0.4)] hover:shadow-[0_20px_50px_rgba(0,212,255,0.6)] hover:-translate-y-2 transition-all overflow-hidden"
+              className="relative px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-full font-bold text-base md:text-lg shadow-[0_6px_20px_rgba(0,212,255,0.4)] hover:shadow-[0_20px_50px_rgba(0,212,255,0.6)] hover:-translate-y-2 transition-all overflow-hidden"
               onClick={createRipple}
             >
-              <span className="relative z-10 flex items-center gap-2">
+              <span className="relative z-10 flex items-center gap-2 justify-center">
                 <i className="fas fa-laptop-code"></i>
-                View My Work
+                View My Research
               </span>
             </a>
             <a 
               href="#contact" 
-              className="relative px-8 py-4 bg-transparent border-2 border-cyan-400 text-cyan-400 rounded-full font-bold text-lg hover:bg-cyan-400/10 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,212,255,0.6)] transition-all"
+              className="relative px-6 md:px-8 py-3 md:py-4 bg-transparent border-2 border-cyan-400 text-cyan-400 rounded-full font-bold text-base md:text-lg hover:bg-cyan-400/10 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,212,255,0.6)] transition-all"
               onClick={createRipple}
             >
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-2 justify-center">
                 <i className="fas fa-handshake"></i>
                 Get In Touch
               </span>
@@ -588,23 +660,23 @@ const Portfolio = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24 px-6">
+      <section id="about" className="py-16 md:py-24 px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl md:text-6xl font-bold gradient-text text-center mb-16 flex items-center justify-center gap-4">
+          <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold gradient-text text-center mb-12 md:mb-16 flex items-center justify-center gap-3 md:gap-4 flex-wrap">
             <i className="fas fa-user-graduate"></i>
-            About Me
+            <span>About Me</span>
           </h2>
           
-          <div className="grid md:grid-cols-[350px_1fr] gap-12 items-center">
+          <div className="grid md:grid-cols-[300px_1fr] lg:grid-cols-[350px_1fr] gap-8 md:gap-12 items-center">
             <div 
-              className="w-80 h-80 mx-auto rounded-full bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 flex items-center justify-center hover:scale-110 transition-all cursor-pointer relative"
+              className="w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 mx-auto rounded-full bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 flex items-center justify-center hover:scale-110 transition-all cursor-pointer relative"
               style={{
                 animation: 'imageFloat 4s ease-in-out infinite',
                 boxShadow: '0 0 60px rgba(0, 212, 255, 0.6)',
                 willChange: 'transform, box-shadow'
               }}
             >
-              <i className="fas fa-shield-halved text-9xl text-white"></i>
+              <i className="fas fa-shield-halved text-7xl md:text-8xl lg:text-9xl text-white"></i>
               <div 
                 className="absolute -inset-4 rounded-full opacity-60"
                 style={{
@@ -616,27 +688,28 @@ const Portfolio = () => {
             </div>
             
             <div>
-              <p className="text-xl text-gray-300 mb-6 leading-relaxed">
-                I'm a passionate cybersecurity professional specializing in cyber forensics and digital investigations. 
-                My journey in cybersecurity is driven by curiosity and a commitment to making the digital world safer. 
-                I focus on cyber forensics research, investigative methodologies, and developing innovative security tools.
+              <p className="text-lg md:text-xl text-gray-300 mb-4 md:mb-6 leading-relaxed">
+                I'm a passionate cybersecurity researcher and tool developer specializing in cyber crime investigation and digital forensics. 
+                My research focuses on developing innovative investigative methodologies, security tools, and techniques to solve complex 
+                cyber crime cases and enhance digital evidence analysis.
               </p>
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                When I'm not diving deep into code or analyzing security threats, I love traveling and exploring new places. 
-                I'm always learning and staying updated with the latest cybersecurity trends and techniques.
+              <p className="text-lg md:text-xl text-gray-300 mb-6 md:mb-8 leading-relaxed">
+                I love diving deep into challenging cases, building powerful security tools, and using cutting-edge techniques to uncover 
+                digital evidence. Always learning and exploring new approaches in cyber forensics, threat analysis, and security research. 
+                When I'm not investigating cases, developing tools, or researching, I enjoy traveling and exploring new places.
               </p>
               
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 {[
-                  { icon: 'fa-clock', number: '5+', label: 'Years Experience' },
-                  { icon: 'fa-screwdriver-wrench', number: '50+', label: 'Security Tools' },
-                  { icon: 'fa-magnifying-glass-plus', number: '10+', label: 'Cases Analyzed' },
-                  { icon: 'fa-shield-virus', number: '24/7', label: 'Security Focus' }
+                  { icon: 'fa-clock', number: '5+', label: 'Years Research' },
+                  { icon: 'fa-screwdriver-wrench', number: '15+', label: 'Tools Developed' },
+                  { icon: 'fa-magnifying-glass-plus', number: '10+', label: 'Cases Investigated' },
+                  { icon: 'fa-shield-virus', number: '24/7', label: 'Learning Mode' }
                 ].map((stat, i) => (
-                  <div key={i} className="glass p-6 rounded-2xl text-center hover-lift cursor-pointer">
-                    <i className={`fas ${stat.icon} text-4xl text-cyan-400 mb-2 block`}></i>
-                    <div className="text-3xl font-bold text-cyan-400 mb-1">{stat.number}</div>
-                    <div className="text-sm text-gray-400">{stat.label}</div>
+                  <div key={i} className="glass p-4 md:p-6 rounded-2xl text-center hover-lift cursor-pointer">
+                    <i className={`fas ${stat.icon} text-3xl md:text-4xl text-cyan-400 mb-2 block`}></i>
+                    <div className="text-2xl md:text-3xl font-bold text-cyan-400 mb-1">{stat.number}</div>
+                    <div className="text-xs md:text-sm text-gray-400">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -646,81 +719,108 @@ const Portfolio = () => {
       </section>
 
       {/* Tools Section */}
-      <section id="tools" className="py-24 px-6">
+      <section id="tools" className="py-16 md:py-24 px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl md:text-6xl font-bold gradient-text text-center mb-16 flex items-center justify-center gap-4">
+          <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold gradient-text text-center mb-12 md:mb-16 flex items-center justify-center gap-3 md:gap-4 flex-wrap">
             <i className="fas fa-toolbox"></i>
-            Tools & Technologies
+            <span>Tools & Technologies</span>
           </h2>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {[
               {
-                category: 'Operating Systems & Platforms',
+                category: 'Operating Systems',
                 icon: 'fa-terminal',
                 tools: [
-                  { name: 'Kali Linux', desc: 'Primary penetration testing OS', icon: 'fa-linux' },
-                  { name: 'Windows', desc: 'Windows security & forensics', icon: 'fa-windows' },
-                  { name: 'Ubuntu Server', desc: 'Linux server administration', icon: 'fa-ubuntu' }
+                  { name: 'Kali Linux', desc: 'Primary investigation OS', icon: 'fa-linux' },
+                  { name: 'Windows', desc: 'Windows forensics & analysis', icon: 'fa-windows' },
+                  { name: 'Red Hat Linux', desc: 'Enterprise security testing', icon: 'fa-redhat' }
                 ]
               },
               {
-                category: 'Digital Forensics Tools',
+                category: 'Digital Forensics',
                 icon: 'fa-magnifying-glass',
                 tools: [
-                  { name: 'Autopsy', desc: 'Digital forensics investigation', icon: 'fa-microscope' },
-                  { name: 'FTK', desc: 'Computer forensics software', icon: 'fa-hammer' },
-                  { name: 'EnCase', desc: 'Digital investigation suite', icon: 'fa-hard-drive' }
+                  { name: 'Autopsy', desc: 'Digital forensics platform', icon: 'fa-microscope' },
+                  { name: 'FTK', desc: 'Forensic toolkit suite', icon: 'fa-hammer' },
+                  { name: 'Wireshark', desc: 'Network protocol analyzer', icon: 'fa-fish' }
                 ]
               },
               {
                 category: 'Penetration Testing',
                 icon: 'fa-bug',
                 tools: [
-                  { name: 'Burp Suite', desc: 'Web application security', icon: 'fa-crosshairs' },
+                  { name: 'Burp Suite', desc: 'Web security testing', icon: 'fa-crosshairs' },
                   { name: 'Metasploit', desc: 'Exploitation framework', icon: 'fa-bomb' },
-                  { name: 'Nmap', desc: 'Network discovery', icon: 'fa-network-wired' }
+                  { name: 'Nmap', desc: 'Network scanning & discovery', icon: 'fa-network-wired' }
                 ]
               },
               {
-                category: 'Network Analysis',
+                category: 'Password & Brute Force',
+                icon: 'fa-key',
+                tools: [
+                  { name: 'Hydra', desc: 'Network login cracker', icon: 'fa-lock-open' },
+                  { name: 'John the Ripper', desc: 'Password cracking tool', icon: 'fa-unlock' },
+                  { name: 'SQLMap', desc: 'SQL injection automation', icon: 'fa-database' }
+                ]
+              },
+              {
+                category: 'OSINT & Reconnaissance',
                 icon: 'fa-eye',
                 tools: [
-                  { name: 'Wireshark', desc: 'Network protocol analyzer', icon: 'fa-fish' },
-                  { name: 'tcpdump', desc: 'Packet analyzer', icon: 'fa-ethernet' },
-                  { name: 'NetworkMiner', desc: 'Network forensic tool', icon: 'fa-chart-line' }
+                  { name: 'Amass', desc: 'Network mapping & enumeration', icon: 'fa-map' },
+                  { name: 'TheHarvester', desc: 'Email & subdomain discovery', icon: 'fa-envelope-open-text' },
+                  { name: 'AssetFinder', desc: 'Domain & subdomain enumeration', icon: 'fa-sitemap' }
                 ]
               },
               {
-                category: 'Development & Scripting',
+                category: 'SIEM & Monitoring',
+                icon: 'fa-chart-line',
+                tools: [
+                  { name: 'Wazuh', desc: 'Security monitoring platform', icon: 'fa-shield-halved' },
+                  { name: 'Sysmon', desc: 'System activity monitoring', icon: 'fa-desktop' },
+                  { name: 'Splunk', desc: 'Log analysis & SIEM', icon: 'fa-chart-bar' }
+                ]
+              },
+              {
+                category: 'Malware Analysis',
+                icon: 'fa-virus',
+                tools: [
+                  { name: 'PEStudio', desc: 'Malware initial assessment', icon: 'fa-file-code' },
+                  { name: 'CFF Explorer', desc: 'PE file structure analysis', icon: 'fa-microscope' },
+                  { name: 'YARA', desc: 'Malware identification', icon: 'fa-fingerprint' }
+                ]
+              },
+              {
+                category: 'Scripting & Automation',
                 icon: 'fa-code',
                 tools: [
-                  { name: 'Python', desc: 'Security automation', icon: 'fa-python' },
-                  { name: 'Bash', desc: 'Linux automation', icon: 'fa-terminal' },
+                  { name: 'Python', desc: 'Security automation & scripting', icon: 'fa-python' },
+                  { name: 'Bash', desc: 'Linux automation & scripting', icon: 'fa-terminal' },
                   { name: 'PowerShell', desc: 'Windows automation', icon: 'fa-file-code' }
                 ]
               },
               {
-                category: 'Security & Analysis',
-                icon: 'fa-shield-virus',
+                category: 'Web Application Security',
+                icon: 'fa-globe',
                 tools: [
-                  { name: 'YARA', desc: 'Malware identification', icon: 'fa-virus' },
-                  { name: 'OWASP ZAP', desc: 'Web security scanner', icon: 'fa-magnifying-glass' },
-                  { name: 'Splunk', desc: 'SIEM platform', icon: 'fa-database' }
+                  { name: 'OWASP ZAP', desc: 'Web security scanner', icon: 'fa-spider' },
+                  { name: 'Nikto', desc: 'Web server scanner', icon: 'fa-server' },
+                  { name: 'DirBuster', desc: 'Directory & file bruteforcer', icon: 'fa-folder-tree' }
                 ]
               }
             ].map((category, i) => (
-              <div key={i} className="glass p-8 rounded-3xl hover-lift">
-                <h3 className="text-2xl font-bold text-cyan-400 mb-6 flex items-center gap-3">
+              <div key={i} className="glass p-6 md:p-8 rounded-3xl hover-lift">
+                <h3 className="text-xl md:text-2xl font-bold text-cyan-400 mb-4 md:mb-6 flex items-center gap-2 md:gap-3">
                   <i className={`fas ${category.icon}`}></i>
-                  {category.category}
+                  <span className="text-base md:text-2xl">{category.category}</span>
                 </h3>
                 {category.tools.map((tool, j) => (
-                  <div key={j} className="bg-cyan-400/10 p-4 rounded-xl mb-4 hover:bg-cyan-400/20 hover:translate-x-2 transition-all cursor-pointer border border-cyan-400/30 flex gap-3">
-                    <i className={`fas ${tool.icon} text-2xl text-cyan-400`}></i>
+                  <div key={j} className="bg-cyan-400/10 p-3 md:p-4 rounded-xl mb-3 md:mb-4 hover:bg-cyan-400/20 hover:translate-x-2 transition-all cursor-pointer border border-cyan-400/30 flex gap-2 md:gap-3">
+                    <i className={`fas ${tool.icon} text-xl md:text-2xl text-cyan-400`}></i>
                     <div>
-                      <div className="font-semibold text-white">{tool.name}</div>
-                      <div className="text-sm text-gray-400">{tool.desc}</div>
+                      <div className="font-semibold text-white text-sm md:text-base">{tool.name}</div>
+                      <div className="text-xs md:text-sm text-gray-400">{tool.desc}</div>
                     </div>
                   </div>
                 ))}
@@ -731,67 +831,52 @@ const Portfolio = () => {
       </section>
 
       {/* Experience Timeline */}
-      <section id="experience" className="py-24 px-6">
+      <section id="experience" className="py-16 md:py-24 px-4 md:px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl md:text-6xl font-bold gradient-text text-center mb-16 flex items-center justify-center gap-4">
+          <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold gradient-text text-center mb-12 md:mb-16 flex items-center justify-center gap-3 md:gap-4 flex-wrap">
             <i className="fas fa-timeline"></i>
-            Experience & Focus Areas
+            <span>Research & Focus Areas</span>
           </h2>
           
           <div className="relative">
-            <div 
-              className="absolute left-1/2 top-0 bottom-0 w-1.5 bg-gradient-to-b from-cyan-400 via-blue-500 to-purple-600 rounded-full hidden md:block"
-              style={{ 
-                animation: 'timelinePulse 3s ease-in-out infinite',
-                transform: 'translateX(-50%)'
-              }}
-            />
-            
             {[
               {
                 date: 'Current Focus',
-                title: 'Cyber Forensics Research',
-                company: 'Digital Investigations & Security Research',
-                description: 'Focusing on advanced cyber forensics research and developing innovative investigative methodologies to enhance digital crime detection and analysis.'
+                title: 'Cyber Crime Investigation & Tool Development',
+                company: 'Digital Forensics Research',
+                description: 'Specializing in cyber crime investigation techniques, analyzing complex digital crime cases, and developing innovative security tools and methodologies for evidence collection and analysis.'
               },
               {
                 date: 'Active Development',
                 title: 'Security Tool Development',
                 company: 'Open Source Projects',
-                description: 'Created recon_scanner and other security utilities to assist cybersecurity professionals in reconnaissance and threat assessment activities.'
+                description: 'Developing advanced forensic investigation tools including WhoisUser (OSINT framework), Log Analyzer (threat detection), Secure Gen (payload framework), and Ultimate Digital Forensics Toolkit.'
               },
               {
                 date: 'Specialization',
-                title: 'Digital Forensics & Threat Analysis',
+                title: 'Digital Evidence Analysis',
                 company: 'Cybersecurity Research',
-                description: 'Specializing in comprehensive threat analysis, security reconnaissance, and investigative methodologies.'
+                description: 'Deep focus on digital evidence analysis, threat intelligence, investigative techniques, and building tools to assist cyber crime investigators and security researchers worldwide.'
               },
               {
-                date: 'Personal Interest',
-                title: 'Continuous Learning & Travel',
-                company: 'Professional Development',
-                description: 'Love traveling and exploring new places when not diving deep into code or analyzing security threats.'
+                date: 'Continuous Learning',
+                title: 'Research & Innovation',
+                company: 'Professional Growth',
+                description: 'Always exploring new investigation techniques, developing cutting-edge security tools, learning advanced forensic methodologies, and staying updated with emerging cyber threats.'
               }
             ].map((item, i) => (
-              <div key={i} className={`relative mb-12 md:w-[calc(50%-40px)] ${i % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto'}`}>
-                <div className="glass p-8 rounded-3xl hover-lift cursor-pointer relative">
-                  <div 
-                    className="absolute top-1/2 w-6 h-6 rounded-full bg-cyan-400 border-4 border-[#0a0a0a] shadow-[0_0_20px_rgba(0,212,255,0.5)] hidden md:block"
-                    style={{
-                      [i % 2 === 0 ? 'right' : 'left']: '-65px',
-                      transform: 'translateY(-50%)'
-                    }}
-                  />
-                  <div className="text-cyan-400 font-bold mb-2 flex items-center gap-2">
+              <div key={i} className={`relative mb-8 md:mb-12 md:w-[calc(50%-40px)] ${i % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto'}`}>
+                <div className="glass p-6 md:p-8 rounded-3xl hover-lift cursor-pointer relative">
+                  <div className="text-cyan-400 font-bold mb-2 flex items-center gap-2 text-sm md:text-base">
                     <i className="fas fa-calendar-days"></i>
                     {item.date}
                   </div>
-                  <h3 className="text-2xl font-bold mb-2 flex items-center gap-2">
+                  <h3 className="text-xl md:text-2xl font-bold mb-2 flex items-center gap-2">
                     <i className="fas fa-magnifying-glass"></i>
-                    {item.title}
+                    <span>{item.title}</span>
                   </h3>
-                  <p className="text-blue-400 font-medium mb-4">{item.company}</p>
-                  <p className="text-gray-300 leading-relaxed">{item.description}</p>
+                  <p className="text-blue-400 font-medium mb-3 md:mb-4 text-sm md:text-base">{item.company}</p>
+                  <p className="text-gray-300 leading-relaxed text-sm md:text-base">{item.description}</p>
                 </div>
               </div>
             ))}
@@ -800,70 +885,92 @@ const Portfolio = () => {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-24 px-6">
+      <section id="projects" className="py-16 md:py-24 px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl md:text-6xl font-bold gradient-text text-center mb-16 flex items-center justify-center gap-4">
+          <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold gradient-text text-center mb-12 md:mb-16 flex items-center justify-center gap-3 md:gap-4 flex-wrap">
             <i className="fas fa-rocket"></i>
-            Featured Projects
+            <span>Featured Projects</span>
           </h2>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {[
               {
                 icon: 'fa-toolbox',
                 title: 'Ultimate Digital Forensics Toolkit',
-                description: 'Comprehensive all-in-one digital forensics toolkit featuring multiple investigation tools, evidence collection utilities, and analysis capabilities.',
+                description: 'Comprehensive all-in-one digital forensics toolkit featuring multiple investigation tools, evidence collection utilities, and analysis capabilities for cyber crime investigation.',
                 tags: ['Digital Forensics', 'Investigation', 'Evidence Analysis', 'All-in-One'],
                 link: 'https://github.com/anubhavmohandas/Ultimate-Digital-Forensics-Toolkit'
               },
               {
+                icon: 'fa-user-secret',
+                title: 'WhoisUser - OSINT Framework',
+                description: 'Professional username enumeration and OSINT investigation framework. Automated username discovery across 100+ platforms with intelligent result merging and forensic tools.',
+                tags: ['OSINT', 'Username Enumeration', 'Investigation', 'Multi-Platform'],
+                link: 'https://github.com/anubhavmohandas/whoisuser'
+              },
+              {
+                icon: 'fa-chart-line',
+                title: 'Log Analyzer - Threat Detection',
+                description: 'Security log analysis tool with automated threat detection, IP intelligence with geolocation, and support for multiple log formats including firewalls, systems, and web servers.',
+                tags: ['Log Analysis', 'Threat Detection', 'IP Intelligence', 'Security'],
+                link: 'https://github.com/anubhavmohandas/log-analyzer'
+              },
+              {
+                icon: 'fa-bomb',
+                title: 'Secure Gen - Payload Framework',
+                description: 'Advanced security payload generation framework for ethical hacking. Features 15+ payload types, intelligent mutation techniques, and database-specific attack vectors.',
+                tags: ['Payload Generation', 'Ethical Hacking', 'Security Testing', 'WAF Bypass'],
+                link: 'https://github.com/anubhavmohandas/secure_gen'
+              },
+              {
                 icon: 'fa-search',
                 title: 'Recon Scanner',
-                description: 'Advanced reconnaissance tool designed for cybersecurity professionals to perform comprehensive security assessments.',
+                description: 'Advanced reconnaissance tool designed for cybersecurity researchers to perform comprehensive security assessments and network reconnaissance.',
                 tags: ['Python', 'Network Security', 'Reconnaissance', 'OSINT'],
                 link: 'https://github.com/anubhavmohandas/recon_scanner'
               },
+
               {
                 icon: 'fa-shield-virus',
                 title: 'SIEM Kernel Exploit Detection',
-                description: 'Security Information and Event Management system specialized in detecting kernel-level exploits and advanced persistent threats.',
+                description: 'Security Information and Event Management system specialized in detecting kernel-level exploits and advanced persistent threats in real-time.',
                 tags: ['SIEM', 'Exploit Detection', 'Kernel Security', 'APT'],
                 link: 'https://github.com/anubhavmohandas/siem-kernel-exploit-detection'
               },
               {
                 icon: 'fa-calculator',
                 title: 'Enhanced CVSS Calculator',
-                description: 'Advanced Common Vulnerability Scoring System calculator with enhanced features for accurate vulnerability assessment.',
+                description: 'Advanced Common Vulnerability Scoring System calculator with enhanced features for accurate vulnerability assessment and risk management.',
                 tags: ['CVSS', 'Vulnerability Assessment', 'Risk Management'],
                 link: 'https://github.com/anubhavmohandas/Enhanced-CVSS-Calculator'
               },
               {
                 icon: 'fa-user-shield',
                 title: 'AuthGuard',
-                description: 'Robust authentication and authorization security system designed to protect applications from unauthorized access.',
+                description: 'Robust authentication and authorization security system designed to protect applications from unauthorized access with multi-layer security.',
                 tags: ['Authentication', 'Authorization', 'Access Control'],
                 link: 'https://github.com/anubhavmohandas/AuthGuard'
               },
               {
                 icon: 'fa-robot',
                 title: 'Jerry - Personalized Virtual AI',
-                description: 'Advanced personalized virtual AI assistant designed to provide intelligent automation and personalized interactions.',
+                description: 'Advanced personalized virtual AI assistant designed to provide intelligent automation, personalized interactions, and smart task management.',
                 tags: ['AI Assistant', 'Machine Learning', 'Automation'],
                 link: 'https://github.com/anubhavmohandas/Jerry'
               },
               {
-                icon: 'fa-earth-americas',
-                title: 'Web Detection System',
-                description: 'Advanced web-based detection system for identifying security threats, malicious activities, and anomalous behavior.',
-                tags: ['Web Security', 'Threat Detection', 'Anomaly Detection'],
-                link: 'https://github.com/anubhavmohandas/web_detection'
+                icon: 'fa-file-alt',
+                title: 'Nyxine - AI Resume Maker',
+                description: 'Smart, AI-powered resume builder with privacy focus. Features ATS optimization, job description matching, and authentic experience highlighting without fluff.',
+                tags: ['AI', 'Resume Builder', 'ATS Optimization', 'Privacy-First'],
+                link: 'https://github.com/anubhavmohandas/Nyxine-Resume-Maker'
               },
               {
-                icon: 'fa-key',
-                title: 'Password Strength Checker',
-                description: 'Comprehensive password strength evaluation tool that analyzes password security and provides recommendations.',
-                tags: ['Password Security', 'Security Assessment'],
-                link: 'https://github.com/anubhavmohandas/password_strength_checker'
+                icon: 'fa-earth-americas',
+                title: 'Web Detection System',
+                description: 'Advanced web-based detection system for identifying security threats, malicious activities, and anomalous behavior in real-time web traffic.',
+                tags: ['Web Security', 'Threat Detection', 'Anomaly Detection'],
+                link: 'https://github.com/anubhavmohandas/web_detection'
               }
             ].map((project, i) => (
               <div 
@@ -872,22 +979,22 @@ const Portfolio = () => {
                 onClick={() => window.open(project.link, '_blank')}
               >
                 <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
-                <div className="p-8 text-center bg-gradient-to-br from-cyan-400/10 to-purple-600/10 group-hover:scale-110 transition-transform">
-                  <i className={`fas ${project.icon} text-6xl text-cyan-400`}></i>
+                <div className="p-6 md:p-8 text-center bg-gradient-to-br from-cyan-400/10 to-purple-600/10 group-hover:scale-110 transition-transform">
+                  <i className={`fas ${project.icon} text-5xl md:text-6xl text-cyan-400`}></i>
                 </div>
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold mb-4 group-hover:text-cyan-400 transition-colors flex items-center gap-2">
+                <div className="p-6 md:p-8">
+                  <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 group-hover:text-cyan-400 transition-colors flex items-center gap-2">
                     <i className="fas fa-kit-medical"></i>
-                    {project.title}
+                    <span>{project.title}</span>
                   </h3>
-                  <p className="text-gray-300 mb-6 leading-relaxed group-hover:text-white transition-colors">
+                  <p className="text-gray-300 mb-4 md:mb-6 leading-relaxed group-hover:text-white transition-colors text-sm md:text-base">
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag, j) => (
                       <span 
                         key={j} 
-                        className="bg-cyan-400/20 text-cyan-400 px-3 py-1 rounded-full text-sm border border-cyan-400/30 hover:bg-cyan-400 hover:text-black transition-all cursor-pointer flex items-center gap-1"
+                        className="bg-cyan-400/20 text-cyan-400 px-2 md:px-3 py-1 rounded-full text-xs md:text-sm border border-cyan-400/30 hover:bg-cyan-400 hover:text-black transition-all cursor-pointer flex items-center gap-1"
                       >
                         <i className="fas fa-fingerprint"></i>
                         {tag}
@@ -897,23 +1004,44 @@ const Portfolio = () => {
                 </div>
               </div>
             ))}
+            
+            {/* View More Projects Box */}
+            <div 
+              className="glass rounded-3xl overflow-hidden hover-lift cursor-pointer group relative flex items-center justify-center min-h-[400px]"
+              onClick={() => window.open('https://github.com/anubhavmohandas', '_blank')}
+            >
+              <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
+              <div className="text-center p-8">
+                <i className="fab fa-github text-8xl md:text-9xl text-cyan-400 mb-6 block group-hover:scale-110 transition-transform"></i>
+                <h3 className="text-2xl md:text-3xl font-bold mb-4 group-hover:text-cyan-400 transition-colors">
+                  View More Projects
+                </h3>
+                <p className="text-gray-300 mb-6 leading-relaxed group-hover:text-white transition-colors text-lg">
+                  Explore my complete collection of security tools, research projects, and open-source contributions
+                </p>
+                <div className="inline-flex items-center gap-2 text-cyan-400 font-medium text-lg">
+                  <span>Visit GitHub Profile</span>
+                  <i className="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 px-6">
+      <section id="contact" className="py-16 md:py-24 px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-4xl md:text-6xl font-bold gradient-text mb-8 flex items-center justify-center gap-4">
+          <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold gradient-text mb-6 md:mb-8 flex items-center justify-center gap-3 md:gap-4 flex-wrap">
             <i className="fas fa-handshake"></i>
-            Let's Connect
+            <span>Let's Connect</span>
           </h2>
           
-          <p className="text-xl text-gray-300 mb-12 leading-relaxed">
-            Open for collaboration on cybersecurity projects. Let's secure the digital world together!
+          <p className="text-lg md:text-xl text-gray-300 mb-8 md:mb-12 leading-relaxed px-4">
+            Open for collaboration on cybersecurity research and cyber crime investigation projects. Let's secure the digital world together!
           </p>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {[
               { icon: 'fa-github', label: 'GitHub', link: 'https://github.com/anubhavmohandas' },
               { icon: 'fa-linkedin', label: 'LinkedIn', link: 'https://www.linkedin.com/in/anubhavmohandas/' },
@@ -925,10 +1053,10 @@ const Portfolio = () => {
                 href={contact.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass p-6 rounded-2xl hover-lift flex flex-col items-center gap-3 group"
+                className="glass p-4 md:p-6 rounded-2xl hover-lift flex flex-col items-center gap-2 md:gap-3 group"
               >
-                <i className={`fab ${contact.icon} text-4xl text-cyan-400 group-hover:scale-125 transition-transform`}></i>
-                <span className="font-medium group-hover:text-cyan-400 transition-colors">{contact.label}</span>
+                <i className={`fab ${contact.icon} text-3xl md:text-4xl text-cyan-400 group-hover:scale-125 transition-transform`}></i>
+                <span className="font-medium group-hover:text-cyan-400 transition-colors text-sm md:text-base">{contact.label}</span>
               </a>
             ))}
           </div>
@@ -936,9 +1064,9 @@ const Portfolio = () => {
       </section>
 
       {/* Footer */}
-      <footer className="text-center py-8 px-6 border-t border-cyan-400/20">
-        <p className="text-gray-400 mb-2">© 2025 Anubhav Mohandas. All rights reserved.</p>
-        <p className="text-gray-500">Making the digital world safer, one line of code at a time.</p>
+      <footer className="text-center py-6 md:py-8 px-4 md:px-6 border-t border-cyan-400/20">
+        <p className="text-gray-400 mb-2 text-sm md:text-base">© 2025 Anubhav Mohandas. All rights reserved.</p>
+        <p className="text-gray-500 text-sm md:text-base">Cybersecurity researcher & tool developer - Making the digital world safer, one investigation at a time.</p>
       </footer>
       
       {/* Spin animation for about image */}

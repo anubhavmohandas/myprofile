@@ -839,6 +839,15 @@ const Portfolio = () => {
           </h2>
           
           <div className="relative">
+            {/* Timeline line - visible on desktop */}
+            <div 
+              className="absolute left-1/2 top-0 bottom-0 w-1.5 bg-gradient-to-b from-cyan-400 via-blue-500 to-purple-600 rounded-full hidden md:block"
+              style={{ 
+                animation: 'timelinePulse 3s ease-in-out infinite',
+                transform: 'translateX(-50%)'
+              }}
+            />
+            
             {[
               {
                 date: 'Current Focus',

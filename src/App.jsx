@@ -276,7 +276,7 @@ const App = () => {
       link: 'https://github.com/anubhavmohandas/secure_gen'
     },
     {
-      icon: 'search',
+      icon: 'magnifying-glass',
       title: 'Recon Scanner',
       description: 'Advanced reconnaissance tool designed for cybersecurity researchers to perform comprehensive security assessments and network reconnaissance.',
       tags: ['Python', 'Network Security', 'Reconnaissance', 'OSINT'],
@@ -318,7 +318,7 @@ const App = () => {
       link: 'https://github.com/anubhavmohandas/Nyxine-Resume-Maker'
     },
     {
-      icon: 'earth-americas',
+      icon: 'globe',
       title: 'Web Detection System',
       description: 'Advanced web-based detection system for identifying security threats, malicious activities, and anomalous behavior in real-time web traffic.',
       tags: ['Web Security', 'Threat Detection', 'Anomaly Detection'],

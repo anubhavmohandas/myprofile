@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import './App.css';
 
 const App = () => {
@@ -9,8 +9,11 @@ const App = () => {
   const [showCharacter, setShowCharacter] = useState(true);
   const [showBubble, setShowBubble] = useState(false);
   const [bubbleMessage, setBubbleMessage] = useState('');
+  const [konamiActive, setKonamiActive] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   
+  const konamiCode = useRef([]);
+  const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight'];
   const trailPositions = useRef(Array(8).fill({ x: 0, y: 0 }));
 
   // Theme toggle
@@ -59,6 +62,34 @@ const App = () => {
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Konami Code Detection
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      konamiCode.current.push(e.key);
+      if (konamiCode.current.length > 10) {
+        konamiCode.current.shift();
+      }
+      
+      const currentSequence = konamiCode.current.join(',');
+      const targetSequence = konamiSequence.join(',');
+      
+      if (currentSequence === targetSequence) {
+        setKonamiActive(true);
+        setBubbleMessage("🌈 Rainbow Mode Activated! You found the secret!");
+        setShowBubble(true);
+        
+        setTimeout(() => {
+          setKonamiActive(false);
+          setShowBubble(false);
+          konamiCode.current = [];
+        }, 10000);
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
   }, []);
 
   // Mouse tracking for custom cursor
@@ -297,34 +328,30 @@ const App = () => {
 
   return (
     <div className="portfolio">
-      {/* Skip Link */}
-      <a href="#main-content" className="skip-link">Skip to main content</a>
+      {/* Konami Rainbow Overlay */}
+      {konamiActive && (
+        <div className="konami-overlay" />
+      )}
 
       {/* Custom Cursor - Desktop Only */}
       {typeof window !== 'undefined' && window.innerWidth > 768 && (
         <>
           <div 
-            className="fixed w-10 h-10 rounded-full pointer-events-none z-[9998] mix-blend-screen"
+            className="custom-cursor"
             style={{
               left: `${mousePos.x}px`,
-              top: `${mousePos.y}px`,
-              background: 'radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, transparent 70%)',
-              transform: 'translate(-50%, -50%)',
-              willChange: 'transform'
+              top: `${mousePos.y}px`
             }}
           />
           {trailPositions.current.map((pos, i) => (
             <div
               key={i}
-              className="fixed w-2 h-2 rounded-full pointer-events-none z-[9999]"
+              className="cursor-trail"
               style={{
                 left: `${pos.x}px`,
                 top: `${pos.y}px`,
-                background: 'var(--accent)',
                 opacity: (1 - i / 8) * 0.8,
-                transform: `translate(-50%, -50%) scale(${1 - i / 8})`,
-                boxShadow: '0 0 15px var(--accent)',
-                willChange: 'transform'
+                transform: `translate(-50%, -50%) scale(${1 - i / 8})`
               }}
             />
           ))}
@@ -348,6 +375,9 @@ const App = () => {
           />
         ))}
       </div>
+
+      {/* Skip Link */}
+      <a href="#main-content" className="skip-link">Skip to main content</a>
 
       {/* Character Guide */}
       {showCharacter && (

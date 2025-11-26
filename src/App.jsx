@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import './App.css';
 
 const App = () => {
@@ -9,6 +9,9 @@ const App = () => {
   const [showCharacter, setShowCharacter] = useState(true);
   const [showBubble, setShowBubble] = useState(false);
   const [bubbleMessage, setBubbleMessage] = useState('');
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  
+  const trailPositions = useRef(Array(8).fill({ x: 0, y: 0 }));
 
   // Theme toggle
   const toggleTheme = () => {
@@ -57,6 +60,42 @@ const App = () => {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  // Mouse tracking for custom cursor
+  useEffect(() => {
+    if (window.innerWidth <= 768) return;
+    
+    let rafId;
+    const handleMouseMove = (e) => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        setMousePos({ x: e.clientX, y: e.clientY });
+        trailPositions.current = [
+          { x: e.clientX, y: e.clientY },
+          ...trailPositions.current.slice(0, 7)
+        ];
+        rafId = null;
+      });
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, []);
+
+  // Animated particles
+  const particles = useMemo(() => 
+    Array.from({ length: 25 }, (_, i) => ({
+      id: i,
+      size: Math.random() * 4 + 1,
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      delay: Math.random() * 8,
+      duration: Math.random() * 4 + 6
+    }))
+  , []);
 
   // Character guide messages
   const handleCharacterClick = () => {
@@ -121,12 +160,21 @@ const App = () => {
       ]
     },
     {
+      category: 'Password & Brute Force',
+      icon: 'key',
+      items: [
+        { name: 'Hydra', desc: 'Network login cracker', icon: 'lock-open' },
+        { name: 'John the Ripper', desc: 'Password cracking tool', icon: 'unlock' },
+        { name: 'SQLMap', desc: 'SQL injection automation', icon: 'database' }
+      ]
+    },
+    {
       category: 'OSINT & Reconnaissance',
       icon: 'eye',
       items: [
         { name: 'Amass', desc: 'Network mapping & enumeration', icon: 'map' },
         { name: 'TheHarvester', desc: 'Email & subdomain discovery', icon: 'envelope-open-text' },
-        { name: 'AssetFinder', desc: 'Domain enumeration', icon: 'sitemap' }
+        { name: 'AssetFinder', desc: 'Domain & subdomain enumeration', icon: 'sitemap' }
       ]
     },
     {
@@ -146,6 +194,24 @@ const App = () => {
         { name: 'CFF Explorer', desc: 'PE file structure analysis', icon: 'microscope' },
         { name: 'YARA', desc: 'Malware identification', icon: 'fingerprint' }
       ]
+    },
+    {
+      category: 'Scripting & Automation',
+      icon: 'code',
+      items: [
+        { name: 'Python', desc: 'Security automation & scripting', icon: 'python' },
+        { name: 'Bash', desc: 'Linux automation & scripting', icon: 'terminal' },
+        { name: 'PowerShell', desc: 'Windows automation', icon: 'file-code' }
+      ]
+    },
+    {
+      category: 'Web Application Security',
+      icon: 'globe',
+      items: [
+        { name: 'OWASP ZAP', desc: 'Web security scanner', icon: 'spider' },
+        { name: 'Nikto', desc: 'Web server scanner', icon: 'server' },
+        { name: 'DirBuster', desc: 'Directory & file bruteforcer', icon: 'folder-tree' }
+      ]
     }
   ];
 
@@ -153,37 +219,30 @@ const App = () => {
     {
       icon: 'toolbox',
       title: 'Ultimate Digital Forensics Toolkit',
-      description: 'Comprehensive all-in-one digital forensics toolkit featuring multiple investigation tools, evidence collection utilities, and analysis capabilities.',
-      tags: ['Digital Forensics', 'Investigation', 'Evidence Analysis'],
+      description: 'Comprehensive all-in-one digital forensics toolkit featuring multiple investigation tools, evidence collection utilities, and analysis capabilities for cyber crime investigation.',
+      tags: ['Digital Forensics', 'Investigation', 'Evidence Analysis', 'All-in-One'],
       link: 'https://github.com/anubhavmohandas/Ultimate-Digital-Forensics-Toolkit'
     },
     {
       icon: 'user-secret',
       title: 'WhoisUser - OSINT Framework',
-      description: 'Professional username enumeration and OSINT investigation framework. Automated username discovery across 100+ platforms.',
-      tags: ['OSINT', 'Username Enumeration', 'Investigation'],
+      description: 'Professional username enumeration and OSINT investigation framework. Automated username discovery across 100+ platforms with intelligent result merging and forensic tools.',
+      tags: ['OSINT', 'Username Enumeration', 'Investigation', 'Multi-Platform'],
       link: 'https://github.com/anubhavmohandas/whoisuser'
     },
     {
       icon: 'chart-line',
       title: 'Log Analyzer - Threat Detection',
-      description: 'Security log analysis tool with automated threat detection, IP intelligence with geolocation, and multiple log format support.',
-      tags: ['Log Analysis', 'Threat Detection', 'Security'],
+      description: 'Security log analysis tool with automated threat detection, IP intelligence with geolocation, and support for multiple log formats including firewalls, systems, and web servers.',
+      tags: ['Log Analysis', 'Threat Detection', 'IP Intelligence', 'Security'],
       link: 'https://github.com/anubhavmohandas/log-analyzer'
     },
     {
       icon: 'bomb',
       title: 'Secure Gen - Payload Framework',
-      description: 'Advanced security payload generation framework for ethical hacking with 15+ payload types and intelligent mutation techniques.',
-      tags: ['Payload Generation', 'Ethical Hacking', 'WAF Bypass'],
+      description: 'Advanced security payload generation framework for ethical hacking. Features 15+ payload types, intelligent mutation techniques, and database-specific attack vectors.',
+      tags: ['Payload Generation', 'Ethical Hacking', 'Security Testing', 'WAF Bypass'],
       link: 'https://github.com/anubhavmohandas/secure_gen'
-    },
-    {
-      icon: 'shield-virus',
-      title: 'SIEM Kernel Exploit Detection',
-      description: 'Security Information and Event Management system specialized in detecting kernel-level exploits and APTs in real-time.',
-      tags: ['SIEM', 'Exploit Detection', 'Kernel Security'],
-      link: 'https://github.com/anubhavmohandas/siem-kernel-exploit-detection'
     },
     {
       icon: 'search',
@@ -193,6 +252,13 @@ const App = () => {
       link: 'https://github.com/anubhavmohandas/recon_scanner'
     },
     {
+      icon: 'shield-virus',
+      title: 'SIEM Kernel Exploit Detection',
+      description: 'Security Information and Event Management system specialized in detecting kernel-level exploits and advanced persistent threats in real-time.',
+      tags: ['SIEM', 'Exploit Detection', 'Kernel Security', 'APT'],
+      link: 'https://github.com/anubhavmohandas/siem-kernel-exploit-detection'
+    },
+    {
       icon: 'calculator',
       title: 'Enhanced CVSS Calculator',
       description: 'Advanced Common Vulnerability Scoring System calculator with enhanced features for accurate vulnerability assessment and risk management.',
@@ -200,11 +266,32 @@ const App = () => {
       link: 'https://github.com/anubhavmohandas/Enhanced-CVSS-Calculator'
     },
     {
+      icon: 'user-shield',
+      title: 'AuthGuard',
+      description: 'Robust authentication and authorization security system designed to protect applications from unauthorized access with multi-layer security.',
+      tags: ['Authentication', 'Authorization', 'Access Control'],
+      link: 'https://github.com/anubhavmohandas/AuthGuard'
+    },
+    {
       icon: 'robot',
       title: 'Jerry - Personalized Virtual AI',
-      description: 'Advanced personalized virtual AI assistant for intelligent automation, personalized interactions, and smart task management.',
+      description: 'Advanced personalized virtual AI assistant designed to provide intelligent automation, personalized interactions, and smart task management.',
       tags: ['AI Assistant', 'Machine Learning', 'Automation'],
       link: 'https://github.com/anubhavmohandas/Jerry'
+    },
+    {
+      icon: 'file-alt',
+      title: 'Nyxine - AI Resume Maker',
+      description: 'Smart, AI-powered resume builder with privacy focus. Features ATS optimization, job description matching, and authentic experience highlighting without fluff.',
+      tags: ['AI', 'Resume Builder', 'ATS Optimization', 'Privacy-First'],
+      link: 'https://github.com/anubhavmohandas/Nyxine-Resume-Maker'
+    },
+    {
+      icon: 'earth-americas',
+      title: 'Web Detection System',
+      description: 'Advanced web-based detection system for identifying security threats, malicious activities, and anomalous behavior in real-time web traffic.',
+      tags: ['Web Security', 'Threat Detection', 'Anomaly Detection'],
+      link: 'https://github.com/anubhavmohandas/web_detection'
     }
   ];
 
@@ -212,6 +299,55 @@ const App = () => {
     <div className="portfolio">
       {/* Skip Link */}
       <a href="#main-content" className="skip-link">Skip to main content</a>
+
+      {/* Custom Cursor - Desktop Only */}
+      {typeof window !== 'undefined' && window.innerWidth > 768 && (
+        <>
+          <div 
+            className="fixed w-10 h-10 rounded-full pointer-events-none z-[9998] mix-blend-screen"
+            style={{
+              left: `${mousePos.x}px`,
+              top: `${mousePos.y}px`,
+              background: 'radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, transparent 70%)',
+              transform: 'translate(-50%, -50%)',
+              willChange: 'transform'
+            }}
+          />
+          {trailPositions.current.map((pos, i) => (
+            <div
+              key={i}
+              className="fixed w-2 h-2 rounded-full pointer-events-none z-[9999]"
+              style={{
+                left: `${pos.x}px`,
+                top: `${pos.y}px`,
+                background: 'var(--accent)',
+                opacity: (1 - i / 8) * 0.8,
+                transform: `translate(-50%, -50%) scale(${1 - i / 8})`,
+                boxShadow: '0 0 15px var(--accent)',
+                willChange: 'transform'
+              }}
+            />
+          ))}
+        </>
+      )}
+
+      {/* Animated Background Particles */}
+      <div className="animated-bg">
+        {particles.map((p) => (
+          <div
+            key={p.id}
+            className="particle"
+            style={{
+              width: `${p.size}px`,
+              height: `${p.size}px`,
+              left: `${p.left}%`,
+              top: `${p.top}%`,
+              animationDelay: `${p.delay}s`,
+              animationDuration: `${p.duration}s`
+            }}
+          />
+        ))}
+      </div>
 
       {/* Character Guide */}
       {showCharacter && (

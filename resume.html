@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Anubhav Mohandas — Resume</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Geist', system-ui, sans-serif;
+  background: #f6f0e4;
+  color: #1a1410;
+  line-height: 1.5;
+  padding: 48px;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.page {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 64px;
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.actions {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  z-index: 100;
+}
+.actions a, .actions button {
+  background: #d94a0a;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 4px;
+  border: 0;
+  font: 13px/1 'JetBrains Mono', monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+}
+.actions a:hover, .actions button:hover { background: #8a2e02; }
+
+.head {
+  border-bottom: 2px solid #1a1410;
+  padding-bottom: 24px;
+  margin-bottom: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+h1 {
+  font-size: 42px;
+  letter-spacing: -0.025em;
+  line-height: 0.95;
+}
+h1 .accent {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  color: #d94a0a;
+  font-weight: 400;
+}
+
+.title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: #6b6258;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+.contact {
+  text-align: right;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+}
+.contact a { color: #d94a0a; text-decoration: none; }
+
+section {
+  margin-bottom: 28px;
+}
+
+h2 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: #d94a0a;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #d6d0c2;
+  padding-bottom: 6px;
+}
+
+.summary {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #2a221c;
+}
+
+.role {
+  margin-bottom: 18px;
+}
+.role-head {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.role-title {
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+.role-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: #6b6258;
+}
+.role-desc {
+  font-size: 14px;
+  color: #2a221c;
+  line-height: 1.55;
+}
+.role-desc ul {
+  list-style: none;
+  padding-left: 16px;
+}
+.role-desc li {
+  position: relative;
+  padding: 3px 0;
+}
+.role-desc li::before {
+  content: '·';
+  color: #d94a0a;
+  position: absolute;
+  left: -14px;
+  font-weight: 700;
+}
+
+.skills {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 32px;
+}
+.skill-group {
+  font-size: 13px;
+}
+.skill-group-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: #d94a0a;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.placeholder-note {
+  position: absolute;
+  top: 16px; left: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: #d94a0a;
+  background: rgba(217, 74, 10, 0.08);
+  padding: 4px 8px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+@media print {
+  body { background: #fff; padding: 0; }
+  .page { box-shadow: none; padding: 32px; max-width: 100%; }
+  .actions, .placeholder-note { display: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="actions">
+  <button onclick="window.print()">Print / Save as PDF</button>
+  <a href="index.html">← Back to portfolio</a>
+</div>
+
+<div class="page">
+  <div class="placeholder-note">PLACEHOLDER · UPDATE WITH YOUR REAL CONTENT</div>
+
+  <div class="head">
+    <div>
+      <h1>Anubhav <span class="accent">Mohandas.</span></h1>
+      <div class="title">Cybersecurity Researcher · AI Systems Engineer</div>
+    </div>
+    <div class="contact">
+      anubhav.manav147@gmail.com<br>
+      github.com/<a href="https://github.com/anubhavmohandas">anubhavmohandas</a><br>
+      linkedin.com/in/<a href="https://www.linkedin.com/in/anubhavmohandas/">anubhavmohandas</a><br>
+      India · 28.6°N 77.2°E
+    </div>
+  </div>
+
+  <section>
+    <h2>SUMMARY</h2>
+    <p class="summary">
+      Five years building cybersecurity tools and digital forensics workflows.
+      Two years pulling autonomous AI agents into the same toolbox.
+      I build systems that don't just <em style="font-family: 'Instrument Serif', serif; color: #d94a0a;">notify</em> — they act:
+      autonomous CVE patching pipelines, OSINT investigation platforms,
+      local-first LLM assistants, market-research SaaS factories.
+    </p>
+  </section>
+
+  <section>
+    <h2>SELECTED WORK · ONGOING</h2>
+
+    <div class="role">
+      <div class="role-head">
+        <span class="role-title">SAGE — Security Analysis &amp; Graph Engine</span>
+        <span class="role-date">2025 — present</span>
+      </div>
+      <div class="role-desc">
+        <ul>
+          <li>Autonomous CVE patching pipeline: polls NVD, maps transitive dependency exposure via tree-sitter + NetworkX knowledge graph (Synapse), generates Claude-validated patches, opens GitHub PRs.</li>
+          <li>Static-first detection with Semgrep; LLM-generated CVE-specific attack tests prove patches before they ship.</li>
+          <li>Python · Claude API · Semgrep · tree-sitter · NetworkX · NVD API · GitHub API</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="role-head">
+        <span class="role-title">NYX — Personal AI Assistant</span>
+        <span class="role-date">2025 — present</span>
+      </div>
+      <div class="role-desc">
+        <ul>
+          <li>Voice-activated local AI assistant. Hot-word detection with VAD, multi-model fallback (Claude → Mistral → local Qwen 3.5 72B via Ollama).</li>
+          <li>Multilingual (Hindi, English, Hinglish, Malayalam). Persistent semantic memory across sessions. Runs entirely on Apple Silicon.</li>
+          <li>Integrates SAGE (security) and ARGUS (OSINT recon) as callable tools.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="role-head">
+        <span class="role-title">MIDAS — Autonomous SaaS Builder</span>
+        <span class="role-date">2025 — present</span>
+      </div>
+      <div class="role-desc">
+        <ul>
+          <li>Five-phase overnight pipeline: pain discovery (Reddit / X / ProductHunt / App Store), scoring, cold-outreach validation, autonomous full-stack scaffold (FastAPI + Supabase + Stripe + Vercel), and ProductHunt launch.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="role-head">
+        <span class="role-title">CyberTrace — OSINT Intelligence Platform</span>
+        <span class="role-date">2024 — present</span>
+      </div>
+      <div class="role-desc">
+        <ul>
+          <li>Async Python platform that takes any identifier (email, phone, BTC, IP, GSTIN) and queries 30+ surface, deep, and dark-web sources concurrently across 13 modules.</li>
+          <li>Dynamic onion address discovery from PGP-signed clearnet directories. Auto input-detection routes by regex.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="role-head">
+        <span class="role-title">HERMES — Capability Engine for Claude</span>
+        <span class="role-date">2025 — present</span>
+      </div>
+      <div class="role-desc">
+        <ul>
+          <li>One Claude skill, 20 modules across 5 layers (research, memory, execution, synthesis, discovery). Distilled from a hand-read review of 54 open-source repos.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>SHIPPED</h2>
+
+    <div class="role">
+      <div class="role-head">
+        <span class="role-title">GHOST — Browser-native Form Autofill</span>
+        <span class="role-date">2024</span>
+      </div>
+      <div class="role-desc">
+        Chrome / Brave MV3 extension. AES-256-GCM (PBKDF2) encrypted local profiles. Detects 80+ field types via pattern recognition. Reverse-engineered IRCTC's Angular monolith to add a Tatkal booking module.
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="role-head">
+        <span class="role-title">Nyxine — Privacy-First Resume Builder</span>
+        <span class="role-date">2024</span>
+      </div>
+      <div class="role-desc">
+        React 19 + Vite. Industry &amp; academic flows. In-browser keyword matching against job descriptions. Pre-fills Claude prompts for ATS gap analysis and bullet rewrites. All data in localStorage.
+      </div>
+    </div>
+
+    <div class="role">
+      <div class="role-head">
+        <span class="role-title">Earlier security tools</span>
+        <span class="role-date">2019 — 2024</span>
+      </div>
+      <div class="role-desc">
+        Ultimate Digital Forensics Toolkit · WhoisUser (OSINT username enumeration) · Log Analyzer · Secure Gen (payload framework) · Recon Scanner · SIEM Kernel Exploit Detection · AuthGuard · Enhanced CVSS Calculator · Web Detection System.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>STACK</h2>
+    <div class="skills">
+      <div class="skill-group">
+        <div class="skill-group-title">Languages</div>
+        Python · JavaScript · TypeScript · Bash · PowerShell
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">AI / LLM</div>
+        Claude API · Ollama · Qwen 3.5 · Mistral · LangChain · Composio · Fine-tuning · RAG
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Code Intelligence</div>
+        tree-sitter · NetworkX · Semgrep · AST parsing · Knowledge graphs
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Security</div>
+        Semgrep · YARA · Burp Suite · Wireshark · Metasploit · Nmap · Autopsy · Wazuh · Splunk
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">OSINT</div>
+        TheHarvester · Amass · AssetFinder · Maltego · Shodan · TOR · PGP-signed onion directories
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Backend / Infra</div>
+        FastAPI · Supabase · PostgreSQL · Stripe · Vercel · Netlify · Docker
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>WRITING</h2>
+    <div class="role-desc">
+      Selected articles on Kali Linux fundamentals, OSINT investigation, and autonomous-agent design.
+      Long-form writing returning to a new venue (former host suspended). Portfolio:
+      <a href="https://anubhavmohandas.netlify.app" style="color:#d94a0a">anubhavmohandas.netlify.app</a>
+    </div>
+  </section>
+
+  <p style="margin-top: 40px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #6b6258; letter-spacing: 0.1em; text-align: center;">
+    UPDATED · MAY 2026 · ANUBHAV MOHANDAS
+  </p>
+</div>
+
+</body>
+</html>

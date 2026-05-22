@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BLOG POST TITLE — Anubhav Mohandas</title>
+<meta name="description" content="A one-paragraph summary of the post. Replace me.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
+
+<link rel="stylesheet" href="styles.css">
+
+<style>
+/* ============================================================
+   BLOG POST — drop your writing into this template
+   Replace text inside [ EDIT ] markers. Don't change the structure.
+   ============================================================ */
+
+.post {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 140px var(--gutter) 120px;
+}
+
+.post-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  margin-bottom: 80px;
+  transition: color 0.2s, gap 0.2s;
+}
+.post-back:hover { color: var(--accent); gap: 14px; }
+
+.post-meta {
+  display: flex;
+  gap: 24px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.post-meta .accent { color: var(--accent); }
+
+.post-title {
+  font-family: var(--f-display);
+  font-size: clamp(40px, 6vw, 84px);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  font-weight: 500;
+  margin-bottom: 32px;
+}
+.post-title em {
+  font-family: var(--f-serif);
+  font-style: italic;
+  color: var(--accent-warm);
+  font-weight: 400;
+}
+
+.post-lede {
+  font-family: var(--f-display);
+  font-size: clamp(20px, 1.8vw, 26px);
+  line-height: 1.45;
+  color: var(--ink-2);
+  margin-bottom: 64px;
+  letter-spacing: -0.01em;
+  border-left: 2px solid var(--accent);
+  padding-left: 24px;
+}
+
+.post-body {
+  font-family: var(--f-display);
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+.post-body h2 {
+  font-family: var(--f-display);
+  font-size: clamp(28px, 3vw, 38px);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--ink);
+  font-weight: 500;
+  margin: 64px 0 20px;
+}
+
+.post-body h3 {
+  font-family: var(--f-display);
+  font-size: clamp(20px, 2vw, 26px);
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  font-weight: 500;
+  margin: 40px 0 12px;
+}
+
+.post-body p {
+  margin-bottom: 24px;
+}
+
+.post-body p:first-of-type::first-letter {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 4em;
+  float: left;
+  line-height: 0.85;
+  margin: 4px 12px 0 -4px;
+  color: var(--accent);
+}
+
+.post-body a {
+  color: var(--accent);
+  border-bottom: 1px solid var(--rule-2);
+  transition: border-color 0.2s;
+}
+.post-body a:hover { border-color: var(--accent); }
+
+.post-body em {
+  font-family: var(--f-serif);
+  font-style: italic;
+}
+
+.post-body strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.post-body code {
+  font-family: var(--f-mono);
+  font-size: 0.85em;
+  background: var(--bg-elev);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: var(--accent-warm);
+}
+
+.post-body pre {
+  font-family: var(--f-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  background: var(--bg-elev-2);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 24px;
+  margin: 32px 0;
+  overflow-x: auto;
+  color: var(--ink);
+}
+
+.post-body blockquote {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 1.4em;
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 40px 0;
+  padding-left: 32px;
+  border-left: 3px solid var(--accent);
+}
+
+.post-body ul, .post-body ol {
+  margin: 0 0 24px 24px;
+  padding: 0;
+}
+.post-body li { margin-bottom: 8px; }
+.post-body ul li::marker { color: var(--accent); }
+
+.post-body hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 64px 0;
+}
+
+.post-body img,
+.post-body figure {
+  margin: 40px 0;
+  border-radius: 6px;
+  border: 1px solid var(--rule);
+  overflow: hidden;
+}
+
+.post-end {
+  margin-top: 96px;
+  padding-top: 32px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.post-end a { color: var(--accent); }
+.post-end .footer-glyph {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 40px;
+  color: var(--accent);
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+@media (max-width: 700px) {
+  .post-body p:first-of-type::first-letter {
+    font-size: 3.5em;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Minimal nav back to home -->
+<nav class="nav">
+  <div class="nav-logo" onclick="location.href='index.html'" style="cursor:pointer">
+    <span class="nav-logo-dot"></span>
+    <span>ANUBHAV<span style="color: var(--accent)">.</span></span>
+  </div>
+  <a class="nav-cta" href="index.html">
+    <span>← All work</span>
+  </a>
+</nav>
+
+<article class="post">
+
+  <a class="post-back" href="index.html">← BACK TO PORTFOLIO</a>
+
+  <!-- [ EDIT — META ] date · category · read time -->
+  <div class="post-meta">
+    <span class="accent">22 MAY 2026</span>
+    <span>SAGE · ENGINEERING</span>
+    <span>12 MIN READ</span>
+  </div>
+
+  <!-- [ EDIT — TITLE ] the headline. use <em>word</em> for italic accent. -->
+  <h1 class="post-title">
+    How an LLM <em>patches</em> its own dependencies.
+  </h1>
+
+  <!-- [ EDIT — LEDE ] one-sentence summary that lives next to the title -->
+  <p class="post-lede">
+    Most tools tell you a CVE exists. SAGE finds the function, writes the fix, proves the fix, opens the PR — and waits for you to wake up.
+  </p>
+
+  <!-- [ EDIT — BODY ] write your post here. Use h2 for sections, h3 for subsections.
+       The first paragraph gets a serif drop cap automatically.
+       Examples below — replace them. -->
+  <div class="post-body">
+
+    <p>
+      In December 2021, the world learned that <code>log4j</code> — a library most developers had never typed but every JVM service in production imported — had been a remote code execution time bomb for years. Dependabot saw the CVE. It opened tickets. Nobody knew which functions were actually affected. The patching happened by exhausted humans, manually, over weeks.
+    </p>
+
+    <p>
+      I built SAGE because I wanted to know: <em>can an LLM do this part of the work?</em> Not the "is there a CVE" part — that's solved. The actual <strong>read-the-code, locate-the-vulnerability, write-the-patch, prove-the-patch</strong> part. The part that used to require a human.
+    </p>
+
+    <h2>The naive version is wrong</h2>
+
+    <p>
+      You might think: pull the CVE, paste the affected file into Claude, ask for a fix, open a PR. I tried that. It produced patches that compiled and looked right and broke things silently. The model was confident; the model was wrong; the human reviewing the PR couldn't tell because everything looked plausible.
+    </p>
+
+    <p>
+      Three problems sat on top of each other:
+    </p>
+
+    <ul>
+      <li><strong>Wrong scope.</strong> The vulnerability was in a function the LLM didn't see, called transitively five hops away.</li>
+      <li><strong>Wrong context.</strong> The patch broke a downstream caller because the LLM didn't know who called this function.</li>
+      <li><strong>No proof.</strong> "It compiles" is not "it's fixed." Nobody had asked: <em>does the exploit still work against this version?</em></li>
+    </ul>
+
+    <h2>Synapse: the graph that makes the LLM honest</h2>
+
+    <p>
+      Before SAGE sends anything to Claude, it builds a code knowledge graph called Synapse. <code>tree-sitter</code> parses every function in the codebase. <code>NetworkX</code> stores the call relationships as a directed graph. When a CVE lands, SAGE queries the graph:
+    </p>
+
+    <blockquote>
+      "Find every function in this codebase that — directly or transitively — calls into the vulnerable library function. Bound the search at depth 6. Return the union as the blast radius."
+    </blockquote>
+
+    <p>
+      Only those functions reach the LLM. Everything else stays out of the prompt. The model sees a small, precise universe instead of a vague codebase. Token budgets stop being a wall.
+    </p>
+
+    <h2>Semgrep before the LLM</h2>
+
+    <p>
+      The LLM is not the first reader. Semgrep is. SAGE runs structural pattern detection first — patterns for SQL injection, command injection, XSS, deserialization gadgets. Semgrep doesn't speculate. If it finds a structural match, the vulnerability is real.
+    </p>
+
+    <pre><code># a Semgrep rule SAGE uses for command injection
+rules:
+  - id: subprocess-shell-true
+    pattern: subprocess.$FN(..., shell=True, ...)
+    severity: ERROR
+    message: shell=True with user input is RCE</code></pre>
+
+    <p>
+      Now the LLM gets called with: <em>here's the function, here's the Semgrep finding, here's the CVE description, generate a patch that addresses all three.</em> The hypothesis space is small. The prompt is bounded. The output is testable.
+    </p>
+
+    <h2>The test before the fix</h2>
+
+    <p>
+      Before SAGE writes the patch, it writes the test that would catch the patch failing. The test is CVE-specific: it constructs the exact attack payload from the advisory and runs it against the un-patched function to confirm the test <em>fails</em>. Then SAGE writes the patch, re-runs the test, and confirms it <em>passes</em>. If anything else in the existing test suite goes red, the patch is rejected.
+    </p>
+
+    <p>
+      Most patch-generation pipelines I've seen run tests <em>after</em> the LLM is done. SAGE runs them before, during, and after. The test is the spec; the patch is the answer.
+    </p>
+
+    <h2>What I changed my mind about</h2>
+
+    <p>
+      I started this project believing the LLM would do the heavy lifting. After three months of building it, I think the LLM is the smallest component. The graph is the work. The static analysis is the work. The test generation is the work. The model writes 30 lines of diff at the end of a long, expensive pipeline whose job is to make those 30 lines obvious.
+    </p>
+
+    <p>
+      That is how I think autonomous systems should be built in general. Most of the engineering is in <em>narrowing the question</em> until the model has nothing left to invent.
+    </p>
+
+    <hr>
+
+    <p style="font-style: italic; color: var(--ink-3);">
+      SAGE is in active development. PRs to the design — not the code, the design — are welcome at
+      <a href="https://github.com/anubhavmohandas">github.com/anubhavmohandas</a>.
+    </p>
+
+  </div>
+
+  <div class="post-end">
+    <div>FILED · 22 MAY 2026 · ANUBHAV MOHANDAS</div>
+    <div class="footer-glyph">¶</div>
+    <div><a href="index.html">More work →</a></div>
+  </div>
+
+</article>
+
+<script>
+// Force dark mode on blog posts (matches portfolio aesthetic)
+document.documentElement.setAttribute('data-theme', 'dark');
+</script>
+
+</body>
+</html>

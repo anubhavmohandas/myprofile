@@ -1,0 +1,27 @@
+<!doctype html>
+<html><head>
+<title>Test</title>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>body{background:#000;color:#fff;font:16px sans-serif;padding:40px}</style>
+</head><body>
+<div id="root">Loading...</div>
+<script type="text/babel" src="bundle.jsx" data-presets="env,react"></script>
+<script>
+  window.addEventListener('error', e => {
+    document.body.innerHTML += '<pre style="color:#f55">ERROR: ' + e.message + '\nat ' + e.filename + ':' + e.lineno + '</pre>';
+  });
+  window.addEventListener('unhandledrejection', e => {
+    document.body.innerHTML += '<pre style="color:#f55">REJECT: ' + (e.reason?.message || e.reason) + '</pre>';
+  });
+  setTimeout(() => {
+    const r = document.getElementById('root');
+    if (r && r.textContent === 'Loading...') {
+      document.body.innerHTML += '<pre style="color:#fa0">root unchanged after 4s — bundle did not mount.</pre>';
+    } else {
+      document.body.innerHTML += '<pre style="color:#3f3">root mounted: ' + r.children.length + ' children</pre>';
+    }
+  }, 4000);
+</script>
+</body></html>

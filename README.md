@@ -1,109 +1,125 @@
-# anubhavmohandas.netlify.app
-
-> *I build autonomous systems. Security agents, OSINT pipelines, and local AI that investigate, decide, and act — without supervision.*
-
----
-
-## What's this?
-
-Personal portfolio of **Anubhav Mohandas** — Cybersecurity Researcher, Digital Forensics Specialist, and tool developer based in India.
-
-Not a template. Not a theme. Built from scratch — custom animations, scroll-driven scenes, and a dark UI that actually matches the work it showcases.
-
-Live at → **[anubhavmohandas.netlify.app](https://anubhavmohandas.netlify.app)**
-
----
-
-## The Systems
-
-These aren't side projects. They're ongoing.
-
-| Codename | Full Name | What it does |
-|----------|-----------|--------------|
-| **SAGE** | Security Analysis & Graph Engine | Autonomous pipeline — monitors CVEs, maps blast radius via code graphs, generates patches, opens PRs. Zero human intervention. |
-| **NYX** | Personal AI Assistant | Voice-activated, fully local. Multi-model fallback. No cloud dependency. Speaks Hindi, English, Hinglish, Malayalam. |
-| **MIDAS** | Market Intelligence, Discovery & Autonomous SaaS-builder | Mines pain points overnight, validates demand, scaffolds and ships a full SaaS to Vercel — by morning. |
-| **CyberTrace** | OSINT Intelligence Platform | Give it any identifier — email, BTC address, phone, IP, GSTIN. Queries 30+ surface, deep, and dark web sources in parallel. |
-| **HERMES** | Hybrid Engine for Research, Memory, Execution & Synthesis | 54 open-source patterns distilled into 20 modules across 5 layers. One install, full capability stack for Claude. |
-
----
-
-## More Tools
-
-- **GHOST** — Chrome extension. AES-256-GCM encrypted autofill across 80+ field types. Includes a reverse-engineered Tatkal booking module for IRCTC.
-- **Nyxine** — Privacy-first resume builder. Scores your experience against a JD in-browser. Zero data leaves the device.
-- **WhoisUser** — OSINT username enumeration across 100+ platforms.
-- **Secure Gen** — Payload generation framework. 15+ payload types, WAF bypass, DB-specific attack vectors.
-- **SIEM Kernel Exploit Detection** — Real-time detection of kernel-level exploits and APTs.
-- **Enhanced CVSS Calculator** — Extended vulnerability scoring for real triage workflows.
-- **Ultimate Digital Forensics Toolkit** — Multi-tool investigation suite for cyber crime cases.
-
----
-
-## Stack
-
-No bundler. No CLI. No build step.
-
 ```
-React 18 (UMD)  +  Babel Standalone  →  JSX compiled in the browser
-GSAP + ScrollTrigger                  →  scroll-driven animations
-Lenis                                 →  smooth scroll
-Geist + Instrument Serif              →  typography
+█████╗ ███╗   ██╗██╗   ██╗██████╗ ██╗  ██╗ █████╗ ██╗   ██╗
+██╔══██╗████╗  ██║██║   ██║██╔══██╗██║  ██║██╔══██╗██║   ██║
+███████║██╔██╗ ██║██║   ██║██████╔╝███████║███████║██║   ██║
+██╔══██║██║╚██╗██║██║   ██║██╔══██╗██╔══██║██╔══██║╚██╗ ██╔╝
+██║  ██║██║ ╚████║╚██████╔╝██████╔╝██║  ██║██║  ██║ ╚████╔╝ 
+╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝  ╚═══╝ 
 ```
 
-Everything ships as a single `index.html` with inlined components. Fast to iterate, zero toolchain friction.
+<div align="center">
+
+**Cybersecurity Researcher · Digital Forensics · Autonomous Systems**
+
+[![Live](https://img.shields.io/badge/LIVE-anubhavmohandas.netlify.app-00d4ff?style=for-the-badge&logo=netlify&logoColor=white)](https://anubhavmohandas.netlify.app)
+[![Security](https://img.shields.io/badge/SECURITY-2019%20→%20NOW-ff6b35?style=for-the-badge)](https://anubhavmohandas.netlify.app)
+[![Status](https://img.shields.io/badge/SYSTEMS-SHIPPING-00ff88?style=for-the-badge)](https://anubhavmohandas.netlify.app)
+
+</div>
 
 ---
 
-## Run Locally
+> *Systems that investigate, decide, and act — without supervision.*
+>
+> This isn't a portfolio in the traditional sense. It's a running record of autonomous tools built at the intersection of security research, AI, and digital forensics. Every project here either works in production or is actively being broken and rebuilt.
+
+---
+
+## `// active systems`
+
+### ◈ SAGE — *Security Analysis & Graph Engine*
+CVE drops. SAGE wakes up. It maps your entire transitive dependency graph using tree-sitter + NetworkX, finds every function in the blast radius, calls Claude for a targeted patch, runs CVE-specific exploit tests to verify it, then opens a GitHub PR. You review and merge. That's it. That's all you do.
+
+### ◈ NYX — *Personal AI Assistant*
+Fully local. No API keys phoning home. Voice-activated, multi-model fallback, speaks Hindi / English / Hinglish / Malayalam. The anti-cloud AI assistant — because why trust your conversations to someone else's server?
+
+### ◈ MIDAS — *Market Intelligence, Discovery & Autonomous SaaS-builder*
+Goes to sleep, mines Reddit / Twitter / ProductHunt / App Store for pain signals, validates willingness-to-pay through cold outreach, scaffolds a FastAPI + Supabase + Stripe stack, ships to Vercel, posts to ProductHunt. Wakes you up with a live product. Overnight.
+
+### ◈ CyberTrace — *OSINT Intelligence Platform*
+One identifier in. Everything out. Email → breach history. BTC address → wallet graph. Phone → carrier + owner. IP → geolocation + Shodan exposure. GSTIN → business intel. 30+ sources across surface, deep, and dark web — queried in parallel, results merged and ranked.
+
+### ◈ HERMES — *Hybrid Engine for Research, Memory, Execution & Synthesis*
+54 open-source patterns. 20 modules. 5 layers. One install. Built so Claude can do everything without switching contexts — research, write, remember, execute, synthesize.
+
+---
+
+## `// shipped`
+
+| Tool | What it actually does |
+|------|----------------------|
+| **GHOST** | AES-256-GCM autofill extension. Reverse-engineered IRCTC's Angular monolith for Tatkal booking. No public API was used. |
+| **Nyxine** | Resume builder that never touches a server. JD keyword scoring, ATS gap analysis, AI coaching — all in-browser. |
+| **WhoisUser** | Username across 100+ platforms. One query. |
+| **Secure Gen** | Payload framework — 15+ types, WAF bypass, DB-specific vectors. For ethical hacking. |
+| **SIEM Kernel Exploit Detector** | Real-time APT and kernel-level exploit detection. |
+| **Digital Forensics Toolkit** | All-in-one investigation suite for cyber crime cases. |
+| **Enhanced CVSS Calculator** | Because the standard one isn't enough for real triage. |
+
+---
+
+## `// how it's built`
+
+No Webpack. No Vite. No Next.js. No `npm install` before you can see a button.
+
+```
+React 18 (UMD)  ──▶  loaded from unpkg CDN
+Babel Standalone ──▶  JSX compiled in-browser, at runtime  
+GSAP + ScrollTrigger ──▶  every scroll animation
+Lenis  ──▶  smooth scroll
+Geist + Instrument Serif  ──▶  the typography
+```
+
+The entire app ships as one `index.html` with components inlined as `<script type="text/babel">`. It's unconventional. It's intentional. Zero toolchain means zero toolchain problems.
+
+---
+
+## `// run it`
 
 ```bash
 git clone https://github.com/anubhavmohandas/myprofile.git
 cd myprofile
 python3 -m http.server 3000
-# → http://localhost:3000
 ```
 
-No `npm install`. No `.env`. No setup.
+`http://localhost:3000` — no setup, no installs, no environment files.
 
 ---
 
-## Deploy
+## `// deploy`
 
-Auto-deploys to Netlify on every push to `main`.
+Netlify. Auto-deploys on push to `main`. No build step.
 
 ```toml
-# netlify.toml
 [build]
   publish = "."
   command = "echo 'No build needed'"
 ```
 
-To force a manual deploy:
-
 ```bash
-netlify deploy --prod --dir=. --site=3ed0285a-2104-4461-a6d0-dc8ae031b0c8
+# force a manual push
+netlify deploy --prod --dir=.
 ```
 
 ---
 
-## File Structure
+## `// structure`
 
 ```
 myprofile/
-├── index.html        # Everything starts here
-├── styles.css        # All styles (~84KB, fully custom)
-├── data.js           # Projects, tools, experience — edit here
-├── app.jsx           # Root component + routing logic
-├── nav.jsx           # Navigation bar
-├── scenes-1..4.jsx   # Page sections
-├── assets/           # Portrait + cover image
-├── resume.html       # Standalone resume
-└── netlify.toml      # Netlify config
+├── index.html          ← start here. everything is here.
+├── styles.css          ← ~84KB of custom CSS. no frameworks.
+├── data.js             ← all content lives here. edit this.
+├── app.jsx             ← root component
+├── nav.jsx             ← navigation
+├── scenes-1..4.jsx     ← page sections (Systems, About, Work, Contact)
+├── assets/             ← portrait + cover
+├── resume.html         ← standalone resume page
+└── netlify.toml        ← one file. no build.
 ```
 
 ---
 
 <div align="center">
-  <sub>Security 2019 → Now &nbsp;·&nbsp; @anubhavmohandas</sub>
+<sub><code>security · forensics · autonomous systems · 2019 → now</code></sub>
 </div>

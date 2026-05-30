@@ -3745,3 +3745,220 @@ footer {
 [data-theme="light"] .contact-channel-card {
   background: linear-gradient(135deg, var(--bg-elev), transparent);
 }
+
+/* ============================================================
+   MOBILE — iPhone 15 and similar (≤430px)
+   ============================================================ */
+
+@media (max-width: 430px) {
+
+  /* --- Pinned scene layout: sidebar shrinks, stage gets space --- */
+  .scene-pin {
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
+  }
+
+  .scene-sidebar {
+    padding: 20px var(--gutter) 16px;
+    gap: 10px;
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+    /* Allow sidebar to compress — don't let it eat the full screen */
+    max-height: 42vh;
+    overflow: hidden;
+  }
+
+  /* Trim the large scene title on mobile */
+  .scene-title {
+    font-size: clamp(28px, 9vw, 44px) !important;
+    margin-top: 6px;
+  }
+
+  .scene-blurb {
+    font-size: 13px;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .scene-tags { display: none; }
+
+  .scene-link {
+    font-size: 11px;
+    margin-top: auto;
+  }
+
+  /* Give the stage panel room to breathe */
+  .scene-stage {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* --- SAGE --- */
+  .sage-stage {
+    padding: 16px var(--gutter);
+    gap: 12px;
+  }
+
+  .sage-pipe {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .sage-card {
+    padding: 12px;
+    gap: 6px;
+  }
+
+  .sage-card-body { display: none; }
+  .sage-card-title { font-size: 15px; }
+
+  /* --- NYX --- */
+  .nyx-stage { padding: 16px var(--gutter); }
+
+  .nyx-body {
+    padding: 16px;
+    min-height: unset;
+  }
+
+  .nyx-waveform { height: 50px; margin-bottom: 12px; }
+  .nyx-routes { grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  /* --- MIDAS --- */
+  .midas-stage {
+    padding: 16px var(--gutter);
+    gap: 0;
+  }
+
+  .midas-phase {
+    padding: 14px 0;
+    gap: 14px;
+  }
+
+  .midas-phase-title { font-size: 18px; }
+  .midas-phase-desc { font-size: 11px; }
+
+  /* --- CyberTrace --- */
+  .ct-stage {
+    padding: 16px var(--gutter);
+    gap: 12px;
+  }
+
+  .ct-modules { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .ct-module { min-height: 60px; padding: 10px; }
+  .ct-input { padding: 14px 16px; font-size: 12px; }
+
+  /* --- HERMES --- */
+  .hermes-stage {
+    padding: 16px var(--gutter);
+    gap: 16px;
+  }
+
+  .hermes-stage-title { font-size: 22px; }
+  .hermes-viz { min-height: 260px; }
+
+  .hermes-repos { grid-template-columns: repeat(6, 1fr); gap: 4px; }
+  .hermes-modules { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .hermes-module { padding: 10px 6px; font-size: 8px; min-height: 44px; }
+  .hermes-layer-row { padding: 14px 16px; font-size: 12px; }
+
+  /* --- Constellation --- */
+  .constellation-pin {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .constellation-side {
+    padding: 20px var(--gutter) 16px;
+    max-height: 40vh;
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* --- Completed cards --- */
+  .completed { padding: 60px var(--gutter); }
+  .completed-grid { gap: 20px; }
+
+  .completed-card {
+    min-height: unset;
+    padding: 24px 20px;
+    gap: 14px;
+  }
+
+  .completed-card-mock { height: 160px; }
+  .completed-card-title { font-size: 26px; }
+  .completed-card-blurb { font-size: 13px; }
+
+  /* --- Archive --- */
+  .archive { padding: 60px var(--gutter); }
+  .archive-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* --- Stack --- */
+  .stack { padding: 60px var(--gutter); }
+  .stack-grid { gap: 28px; }
+
+  /* --- Writing --- */
+  .writing { padding: 60px var(--gutter); }
+  .writing-item {
+    grid-template-columns: 80px 1fr;
+    gap: 12px;
+    padding: 20px 0;
+  }
+  .writing-item-title { font-size: 17px; }
+
+  /* --- Contact --- */
+  .contact { padding: 80px var(--gutter) 60px; }
+
+  .contact-headline {
+    font-size: clamp(36px, 11vw, 64px) !important;
+  }
+
+  .contact-grid { margin-top: 48px; gap: 32px; }
+
+  .contact-channel {
+    grid-template-columns: 60px 1fr auto;
+    gap: 12px;
+    padding: 18px 0;
+  }
+
+  .contact-channel-val { font-size: 16px !important; }
+
+  /* --- Now widget --- */
+  .now-widget {
+    width: calc(100vw - 32px);
+    right: 16px;
+    bottom: 16px;
+  }
+
+  /* --- Hero --- */
+  .hero-meta-bot {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  /* --- Thesis --- */
+  .thesis { padding: 16vh var(--gutter); }
+  .thesis-statement { font-size: clamp(28px, 8vw, 48px); }
+
+  /* --- Portrait --- */
+  .portrait-h2 { font-size: clamp(36px, 10vw, 56px) !important; }
+  .portrait-intro { max-width: 100%; }
+
+  /* --- Footer --- */
+  .footer-glyph { font-size: clamp(60px, 18vw, 120px); }
+
+  /* --- Studio --- */
+  .studio-over-title { font-size: clamp(36px, 10vw, 60px); }
+  .studio-caption { font-size: 14px; }
+
+  /* Prevent any horizontal overflow */
+  .hero-headline .word,
+  .thesis-statement .word {
+    max-width: 100%;
+  }
+}

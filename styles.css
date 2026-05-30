@@ -833,29 +833,87 @@ button {
 
 .sage-stage {
   display: grid;
-  grid-template-rows: 1fr;
+  grid-template-rows: minmax(200px, 1fr) auto;
   align-items: stretch;
-  padding: 60px var(--gutter);
+  padding: 48px var(--gutter);
+  gap: 24px;
 }
+
+/* Real Synapse graph — the proof hero */
+.sage-graph {
+  position: relative;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #060810;
+  min-height: 200px;
+  transition: border-color 0.5s, box-shadow 0.5s;
+}
+.sage-graph.lit {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(255,94,26,0.25), 0 40px 100px -30px rgba(255,94,26,0.3);
+}
+.sage-graph img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  opacity: 0.92;
+}
+.sage-graph-badge {
+  position: absolute;
+  top: 16px; left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--ink);
+  background: rgba(6, 8, 16, 0.8);
+  backdrop-filter: blur(8px);
+  padding: 6px 12px;
+  border: 1px solid var(--rule-2);
+  border-radius: 99px;
+  text-transform: uppercase;
+}
+.sage-graph-dot {
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent);
+  animation: blink 1.6s ease-in-out infinite;
+}
+.sage-graph-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 32px 20px 16px;
+  background: linear-gradient(to top, rgba(6,8,16,0.95), transparent);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+.sage-graph-caption span { color: var(--accent-warm); }
 
 .sage-pipe {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 16px;
   align-items: stretch;
-  height: 100%;
-  max-height: 540px;
-  margin: auto 0;
+  flex-shrink: 0;
 }
 
 .sage-card {
   border: 1px solid var(--rule);
   background: var(--bg-elev);
   border-radius: 6px;
-  padding: 20px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
   position: relative;
   opacity: 0.4;
   transition: opacity 0.4s, border-color 0.4s, background 0.4s;
@@ -912,6 +970,18 @@ button {
 }
 @media (max-width: 600px) {
   .sage-pipe { grid-template-columns: 1fr; }
+}
+
+/* Short viewports: shrink cards so the proof graph stays visible */
+@media (max-height: 760px) {
+  .sage-stage { padding: 24px var(--gutter); gap: 14px; }
+  .sage-card { padding: 12px; gap: 6px; }
+  .sage-card-body { display: none; }
+  .sage-card-title { font-size: 16px; }
+}
+@media (max-height: 600px) {
+  .sage-stage { grid-template-rows: minmax(160px, 1fr) auto; }
+  .sage-graph-caption { display: none; }
 }
 
 /* ============================================================

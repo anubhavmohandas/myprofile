@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" />
 
 <!-- Styles -->
-<link rel="stylesheet" href="styles.css?v=2026-05-22-13" />
+<link rel="stylesheet" href="styles.css?v=2026-05-30-15" />
 
 <!-- React 18.3.1 -->
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
@@ -98,16 +98,16 @@ const PORTFOLIO_DATA = {
       id: "midas",
       codename: "ONGOING / 03",
       name: "MIDAS",
-      expand: "Market Intelligence, Discovery & Autonomous SaaS-builder",
-      tagline: "An overnight pipeline that discovers consumer pain points, validates willingness to pay, and ships full SaaS products to Vercel — autonomously.",
-      tags: ["Python", "FastAPI", "Supabase", "Stripe", "Vercel", "Claude", "Kimi K2.6"],
+      expand: "Market Intelligence & Discovery Assistant",
+      tagline: "A research assistant that helps me find real market gaps faster. It surfaces pain signals from across the web and helps scaffold quick tests — I steer, it accelerates. Early-stage, and honestly more co-pilot than autopilot.",
+      tags: ["Python", "FastAPI", "Supabase", "Claude", "Kimi K2.6", "Market Research"],
       link: "https://github.com/anubhavmohandas",
       phases: [
-        { num: "P1", title: "Discover", desc: "Mine pain signals overnight from Reddit, Twitter/X, ProductHunt, App Store, Quora, Google Trends.", icons: ["reddit", "x", "ph", "appstore"] },
-        { num: "P2", title: "Score", desc: "Rank by market size, competition density, willingness-to-pay signals. Filter for buildable + monetizable.", icons: ["data"] },
-        { num: "P3", title: "Validate", desc: "Cold outreach to confirm demand. No code is written until people say yes.", icons: ["email"] },
-        { num: "P4", title: "Build", desc: "Auto-scaffold landing page, FastAPI backend, Supabase auth, Stripe billing. Ship to Vercel on push.", icons: ["fastapi", "supabase", "stripe", "vercel"] },
-        { num: "P5", title: "Launch", desc: "ProductHunt listing, social distribution, waitlist email blast. The product is live by morning.", icons: ["ph", "x"] }
+        { num: "01", title: "Discover", desc: "Helps me surface pain signals from Reddit, Twitter/X, ProductHunt, App Store reviews — so I'm reading signal, not scrolling noise.", icons: ["reddit", "x", "ph", "appstore"] },
+        { num: "02", title: "Score", desc: "Sorts what it finds by market size and competition, so I can quickly judge what's worth a closer look.", icons: ["data"] },
+        { num: "03", title: "Validate", desc: "Drafts outreach and helps me check real demand before I commit time. I make the calls; it does the legwork.", icons: ["email"] },
+        { num: "04", title: "Scaffold", desc: "When an idea is worth testing, it helps stand up a quick landing page and backend skeleton so I can put it in front of people fast.", icons: ["fastapi", "supabase"] },
+        { num: "05", title: "Decide", desc: "It hands me a tested starting point — the listing draft, the copy, the skeleton. Whether it ships is my call, not the machine's.", icons: ["ph", "x"] }
       ]
     },
     {
@@ -290,25 +290,6 @@ if (typeof window !== 'undefined') window.PORTFOLIO_DATA = PORTFOLIO_DATA;
 <body>
 <div id="root"></div>
 
-<!-- Visible error reporter (so blank-screen bugs aren't silent) -->
-<div id="err" style="position:fixed;top:0;left:0;right:0;z-index:99999;font:13px monospace;color:#fff;background:#900;padding:0;display:none"></div>
-<script>
-  (function(){
-    function show(msg){
-      var el = document.getElementById('err');
-      el.style.display = 'block';
-      el.style.padding = '12px 16px';
-      el.innerHTML += '<div>' + msg.replace(/</g,'&lt;') + '</div>';
-    }
-    window.addEventListener('error', function(e){
-      show('ERR: ' + (e.message || '') + ' @ ' + (e.filename||'') + ':' + (e.lineno||'') + ':' + (e.colno||''));
-    });
-    window.addEventListener('unhandledrejection', function(e){
-      show('REJECT: ' + ((e.reason && e.reason.message) || e.reason || ''));
-    });
-  })();
-</script>
-
 <!-- ============================================================
      Combined bundle (single Babel script — avoids load races)
      ============================================================ -->
@@ -398,7 +379,7 @@ function Hero() {
           </div>
           <div className="t-mono" style={{ textAlign: 'right' }}>
             <div style={{ color: 'var(--ink-3)' }}>EST.</div>
-            <div>SECURITY 2019 · AI 2024</div>
+            <div>SECURITY 2020 · AI 2025</div>
           </div>
         </div>
 
@@ -758,7 +739,7 @@ function Constellation() {
     { num: "01", title: "An engine", body: "HERMES is the foundation — 20 modules across 5 layers. Research, memory, planning, browser, code review, security. The capability stack." },
     { num: "02", title: "A security layer", body: "SAGE watches code for CVEs and patches them autonomously. ARGUS scouts the web for recon signals. Both built on HERMES." },
     { num: "03", title: "An interface", body: "NYX is the voice on top — local-first, multi-model, multilingual. Calls SAGE and ARGUS as tools." },
-    { num: "04", title: "An autonomous market actor", body: "MIDAS runs the whole stack overnight — discovers, validates, builds, ships consumer products end-to-end. Zero human in the loop." },
+    { num: "04", title: "A research co-pilot", body: "MIDAS helps me find market gaps faster — surfacing signal, sorting it, drafting tests. I steer, it accelerates. Co-pilot, not autopilot." },
     { num: "05", title: "And the standalone work", body: "CyberTrace for investigators. GHOST for the browser. Each its own product, each shipping value today." }
   ];
 
@@ -915,18 +896,24 @@ function SAGEScene() {
             <span className="cur">{String(activeStep + 1).padStart(2, '0')}</span> / 04
           </div>
 
+          {/* Real Synapse knowledge graph — the proof */}
+          <div className={`sage-graph ${activeStep === 1 ? 'lit' : ''}`}>
+            <img src="assets/sage-synapse.png" alt="SAGE Synapse — live code knowledge graph mapping auth.py, its functions, the requests library, and CVE blast radius" />
+            <div className="sage-graph-badge">
+              <span className="sage-graph-dot" />
+              LIVE OUTPUT · SYNAPSE v0.1
+            </div>
+            <div className="sage-graph-caption">
+              Real graph from SAGE — <span>auth.py</span> traced to its functions, the <span>requests</span> library, and the CVE blast radius.
+            </div>
+          </div>
+
           <div className="sage-pipe">
             {D.steps.map((s, i) => (
               <div key={i} className={`sage-card ${i === activeStep ? 'active' : ''} ${i < activeStep ? 'done' : ''}`}>
                 <div className="sage-card-num">STEP {s.num}</div>
                 <div className="sage-card-title">{s.title}</div>
                 <div className="sage-card-body">{s.body}</div>
-                <div className="sage-card-viz">
-                  {i === 0 && <SageWatchViz active={i === activeStep} />}
-                  {i === 1 && <SageMapViz active={i === activeStep} />}
-                  {i === 2 && <SagePatchViz active={i === activeStep} />}
-                  {i === 3 && <SagePRViz active={i === activeStep} />}
-                </div>
               </div>
             ))}
           </div>
@@ -1173,7 +1160,7 @@ function MIDASScene() {
 
         <div className="scene-stage midas-stage">
           <div className="scene-step-counter">
-            <span className="cur">P{step + 1}</span> / P5
+            <span className="cur">{String(step + 1).padStart(2, '0')}</span> / 05
           </div>
           {D.phases.map((p, i) => (
             <div key={i} className={`midas-phase ${i === step ? 'active' : ''}`}>

@@ -3961,4 +3961,107 @@ footer {
   .thesis-statement .word {
     max-width: 100%;
   }
+
+  /* --- Writing featured card (2-col grid → single col) --- */
+  .writing-featured {
+    grid-template-columns: 1fr;
+    margin-bottom: 40px;
+  }
+
+  .writing-featured-cover { display: none; }
+
+  .writing-featured-body {
+    padding: 24px 20px;
+  }
+
+  .writing-featured-title {
+    font-size: clamp(22px, 6vw, 32px) !important;
+  }
+
+  /* --- Archive cards (220px image → smaller) --- */
+  .archive-card {
+    grid-template-rows: 140px 1fr;
+  }
+
+  .archive-card-mock { min-height: 140px; }
+
+  .archive-card-title {
+    font-size: 18px !important;
+  }
+
+  .archive-card-blurb {
+    font-size: 13px;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .archive-card-body { padding: 16px; }
+
+  /* --- Stack meta (counter alignment) --- */
+  .stack-headline-meta {
+    min-width: unset;
+    text-align: left;
+  }
+
+  .stack-counter-wrap { align-items: flex-start; }
+
+  /* --- Philosophy & Mistakes sections --- */
+  .philosophy,
+  .mistakes {
+    padding: 10vh var(--gutter);
+  }
+
+  .phil-headline { font-size: clamp(28px, 8vw, 48px) !important; }
+  .phil-body { font-size: 14px; }
+
+  .mistake-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .mistake-title { font-size: 18px !important; }
+
+  /* --- Breather interstitial --- */
+  .breather { height: 50vh; }
+  .breather-quote {
+    font-size: clamp(20px, 5vw, 32px) !important;
+    padding: 0 var(--gutter);
+    text-align: center;
+  }
+
+  /* --- Boot splash / intro --- */
+  .intro-welcome-title {
+    font-size: clamp(64px, 18vw, 120px) !important;
+  }
+
+  .intro-name {
+    font-size: clamp(36px, 10vw, 72px) !important;
+    white-space: normal;
+  }
+
+  .intro-terminal {
+    font-size: 11px;
+    max-width: calc(100vw - 48px);
+    overflow: hidden;
+  }
+
+  /* Boot lines: allow wrapping so long text doesn't overflow */
+  .intro-line {
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  /* Stack group header: allow wrapping on small screens */
+  .stack-group-head {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .stack-group-count { margin-left: auto; }
+
+  /* --- Contact side card --- */
+  .contact-side { padding: 20px 16px; }
 }

@@ -76,7 +76,7 @@ const PORTFOLIO_DATA = {
       expand: "Security Analysis & Graph Engine",
       tagline: "An autonomous security pipeline that monitors code, maps transitive CVE exposure, generates validated patches, and raises GitHub PRs — without human intervention.",
       tags: ["Python", "Claude", "Semgrep", "tree-sitter", "NetworkX", "NVD API", "GitHub"],
-      link: "https://github.com/anubhavmohandas",
+      link: "https://github.com/anubhavmohandas/SAGE",
       steps: [
         { num: "01", title: "Watch", body: "Daily poll of NVD for new CVEs. Filtered against the actual transitive dependency chain — not just direct imports.", viz: "→ NVD" },
         { num: "02", title: "Map", body: "Synapse — a tree-sitter + NetworkX code graph — locates every function in the blast radius. Only those reach the LLM.", viz: "Σ Synapse" },
@@ -117,7 +117,7 @@ const PORTFOLIO_DATA = {
       expand: "OSINT Intelligence Platform",
       tagline: "Give it any identifier — email, BTC address, phone, IP, GSTIN — and it queries 30+ surface, deep, and dark web sources in parallel.",
       tags: ["Python", "aiohttp", "asyncio", "TOR", "OSINT", "Async"],
-      link: "https://github.com/anubhavmohandas",
+      link: "https://github.com/anubhavmohandas/CyberTrace",
       modules: [
         { name: "Email Breach", srcs: "HIBP · DeHashed" },
         { name: "Phone Intel", srcs: "Truecaller · NumLookup" },
@@ -153,7 +153,7 @@ const PORTFOLIO_DATA = {
       expand: "General Handler of Stored Templates",
       blurb: "A Chrome/Brave extension that intelligently autofills 80+ field types across the web using AES-256-GCM encrypted local profiles. Includes a Tatkal booking module for IRCTC's Angular monolith — reverse-engineered, no public API.",
       tags: ["Chrome MV3", "Web Crypto API", "AES-GCM", "Angular Interop", "Service Workers"],
-      link: "https://github.com/anubhavmohandas",
+      link: "https://github.com/anubhavmohandas/GHOST",
       mock: "ghost"
     },
     {
@@ -276,9 +276,7 @@ const PORTFOLIO_DATA = {
     notice: "Techtonic Hive (anubhavmohandas's writing home) is currently suspended. New venue TBD.",
     posts: [
       { date: "Feb 2024", title: "Essential Kali Linux Commands for Beginners", link: "#" },
-      { date: "Apr 2023", title: "Why OSINT Matters: Exploring Cyber Intelligence", link: "#" },
-      { date: "Coming", title: "Building SAGE — How an LLM Patches Its Own Dependencies", link: "#" },
-      { date: "Coming", title: "HERMES — On Consolidating 54 Repos Into One Skill", link: "#" }
+      { date: "Apr 2023", title: "Why OSINT Matters: Exploring Cyber Intelligence", link: "#" }
     ]
   }
 };
@@ -898,7 +896,7 @@ function SAGEScene() {
 
           {/* Real Synapse knowledge graph — the proof */}
           <div className={`sage-graph ${activeStep === 1 ? 'lit' : ''}`}>
-            <img src="assets/sage-synapse.png" alt="SAGE Synapse — live code knowledge graph mapping auth.py, its functions, the requests library, and CVE blast radius" />
+            <img src="assets/sage-graph.gif" alt="SAGE Synapse — live code knowledge graph mapping auth.py, its functions, the requests library, and CVE blast radius" />
             <div className="sage-graph-badge">
               <span className="sage-graph-dot" />
               LIVE OUTPUT · SYNAPSE v0.1
@@ -1398,17 +1396,51 @@ function Completed() {
       </div>
 
       <div className="completed-grid">
-        {D.map(p => (
-          <CompletedCard key={p.id} project={p} />
+        {D.map((p, i) => (
+          <CompletedCard key={p.id} project={p} index={i} />
         ))}
       </div>
     </section>
   );
 }
 
-function CompletedCard({ project: p }) {
+function CompletedCard({ project: p, index }) {
+  const steps = {
+    ghost: [
+      { num: "01", label: "Store", desc: "AES-256-GCM encrypted profiles saved locally — personal info, credentials, custom fields, Tatkal details. Nothing on a server." },
+      { num: "02", label: "Detect", desc: "Scans the DOM on every page load. Classifies 80+ field types — including IRCTC's Angular shadow DOM, which has no public API." },
+      { num: "03", label: "Fill", desc: "One click autofills every matched field. No sync, no cloud, no trace." }
+    ],
+    nyxine: [
+      { num: "01", label: "Score", desc: "Paste a job description. Keyword engine matches it against your profile in-browser — zero server, zero latency." },
+      { num: "02", label: "Target", desc: "Industry or academic mode. 8 templates. One master profile generates infinite role-specific outputs." },
+      { num: "03", label: "Export", desc: "Download PDF instantly. Zero bytes leave the browser. Claude prompts pre-filled for ATS gap analysis." }
+    ],
+    jerry: [
+      { num: "01", label: "Wake", desc: "Voice activation triggers intent classification — multi-turn context maintained across the session." },
+      { num: "02", label: "Route", desc: "Parses command, dispatches to the right handler — reminders, web, system tasks, custom automations." },
+      { num: "03", label: "Respond", desc: "Personalized output with memory. The architectural precursor to NYX — same instincts, earlier generation." }
+    ],
+    cvss: [
+      { num: "01", label: "Vectors", desc: "Input all CVSS 3.1 base, temporal, and environmental metrics — extended beyond the standard calculator." },
+      { num: "02", label: "Score", desc: "Real-time calculation as you set values. Severity band shown immediately — Critical through None." },
+      { num: "03", label: "Triage", desc: "Built from real security workflows. Not a textbook port — used in actual vulnerability assessment." }
+    ]
+  };
+
+  const projectSteps = steps[p.id] || [];
+
   return (
     <a className="completed-card" href={p.link} target="_blank" rel="noreferrer">
+      <div className="completed-card-header">
+        <span className="t-mono" style={{ color: 'var(--ink-3)', fontSize: 11, letterSpacing: '0.1em' }}>
+          {String(index + 1).padStart(2, '0')}
+        </span>
+        <span className="t-mono" style={{ color: 'var(--accent)', fontSize: 11, letterSpacing: '0.15em' }}>
+          {p.expand?.toUpperCase()}
+        </span>
+      </div>
+
       <div className="completed-card-mock">
         {p.mock === "ghost" && (
           <div className="ghost-mock">
@@ -1482,17 +1514,31 @@ function CompletedCard({ project: p }) {
           </div>
         )}
       </div>
-      <div>
-        <div className="t-mono" style={{ color: 'var(--accent)', fontSize: 11, letterSpacing: '0.15em' }}>
-          {p.expand?.toUpperCase()}
+
+      <div className="completed-card-title">{p.name}</div>
+
+      {projectSteps.length > 0 && (
+        <div className="completed-card-steps">
+          <div style={{ fontFamily: 'var(--f-mono)', fontSize: 10, letterSpacing: '0.14em', color: 'var(--ink-3)', textTransform: 'uppercase', marginBottom: 14 }}>
+            How it works
+          </div>
+          {projectSteps.map(s => (
+            <div key={s.num} className="completed-step">
+              <span className="completed-step-num">{s.num}</span>
+              <div>
+                <span className="completed-step-label">{s.label}</span>
+                <span className="completed-step-sep"> — </span>
+                <span className="completed-step-desc">{s.desc}</span>
+              </div>
+            </div>
+          ))}
         </div>
-        <div className="completed-card-title" style={{ marginTop: 6 }}>{p.name}</div>
-      </div>
-      <p className="completed-card-blurb">{p.blurb}</p>
+      )}
+
       <div className="completed-card-tags">
         {p.tags.map(t => <span key={t} className="scene-tag">{t}</span>)}
       </div>
-      <div className="completed-card-link">View work →</div>
+      <div className="completed-card-link">View on GitHub →</div>
     </a>
   );
 }

@@ -71,7 +71,7 @@ const PORTFOLIO_DATA = {
   ongoing: [
     {
       id: "sage",
-      codename: "ONGOING / 01",
+      codename: "COMPLETED",
       name: "SAGE",
       expand: "Security Analysis & Graph Engine",
       tagline: "An autonomous security pipeline that monitors code, maps transitive CVE exposure, generates validated patches, and raises GitHub PRs — without human intervention.",
@@ -870,7 +870,7 @@ function SAGEScene() {
         <div className="scene-sidebar">
           <div>
             <div className="scene-eyebrow">
-              <span className="scene-codename">{D.codename}</span>
+              <span className={`scene-codename${D.codename === 'COMPLETED' ? ' scene-codename--shipped' : ''}`}>{D.codename}</span>
             </div>
             <h2 className="scene-title">{D.name}</h2>
             <p className="t-mono" style={{ marginTop: 12, color: 'var(--accent-warm)' }}>
@@ -2227,7 +2227,7 @@ function NowWorking() {
   };
 
   const items = [
-    { code: "SAGE",   status: "PHASE 2",      note: "Phase 1 done — core works, onto what's next" },
+    { code: "SAGE",   status: "SHIPPED",      note: "Autonomous security pipeline — fully operational.", done: true },
     { code: "HERMES", status: "ARCHITECTURE", note: "Mapping the pieces before touching code" },
     { code: "NYX",    status: "QUEUED",       note: "Waiting on HERMES — can't start right, won't start yet" },
   ];
@@ -2251,9 +2251,9 @@ function NowWorking() {
       </div>
       <div className="now-body">
         {items.map((it, i) => (
-          <div key={it.code} className={`now-row ${i === pulse ? 'active' : ''}`}>
+          <div key={it.code} className={`now-row ${i === pulse ? 'active' : ''} ${it.done ? 'done' : ''}`}>
             <span className="now-row-code">{it.code}</span>
-            <span className="now-row-status">{it.status}</span>
+            <span className={`now-row-status ${it.done ? 'shipped' : ''}`}>{it.status}</span>
             <span className="now-row-note">{it.note}</span>
           </div>
         ))}

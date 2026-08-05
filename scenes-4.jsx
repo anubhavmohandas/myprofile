@@ -29,7 +29,7 @@ function Completed() {
   const D = window.PORTFOLIO_DATA.completed;
 
   return (
-    <section ref={rootRef} className="completed" id="completed" data-screen-label="09 Completed">
+    <section ref={rootRef} className="completed" id="completed" data-screen-label="10 Completed">
       <div className="section-eyebrow-row">
         <div>
           <div className="eyebrow-row">
@@ -131,15 +131,6 @@ function CompletedCard({ project: p }) {
             </div>
           </div>
         )}
-        {p.mock === "aegis" && (
-          <video
-            className="completed-card-video"
-            src="assets/aegis-hero.mp4"
-            poster="assets/aegis-hero.jpg"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            muted autoPlay loop playsInline
-          />
-        )}
       </div>
       <div>
         <div className="t-mono" style={{ color: 'var(--accent)', fontSize: 11, letterSpacing: '0.15em' }}>
@@ -180,7 +171,7 @@ function Archive() {
   }, []);
 
   return (
-    <section ref={rootRef} className="archive" id="archive" data-screen-label="10 Archive">
+    <section ref={rootRef} className="archive" id="archive" data-screen-label="11 Archive">
       <div className="section-eyebrow-row">
         <div>
           <div className="eyebrow-row">
@@ -241,7 +232,7 @@ function Writing() {
   }, []);
 
   return (
-    <section ref={rootRef} className="writing" id="writing" data-screen-label="11 Writing">
+    <section ref={rootRef} className="writing" id="writing" data-screen-label="12 Writing">
       <div className="section-eyebrow-row">
         <div>
           <div className="eyebrow-row">
@@ -324,7 +315,7 @@ function Contact() {
   ];
 
   return (
-    <section ref={rootRef} className="contact" id="contact" data-screen-label="12 Contact">
+    <section ref={rootRef} className="contact" id="contact" data-screen-label="13 Contact">
       <h2 className="contact-headline">
         <span className="word">Let's</span>{' '}
         <span className="word">build</span>{' '}

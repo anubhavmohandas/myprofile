@@ -187,6 +187,7 @@ function App() {
         <NYXScene_ />
         <CyberTraceScene_ />
         <HERMESScene_ />
+        <AegisScene_ />
         <Completed_ />
         <Archive_ />
         <Writing_ />
@@ -321,6 +322,7 @@ const SAGEScene_ = window.SAGEScene;
 const NYXScene_ = window.NYXScene;
 const CyberTraceScene_ = window.CyberTraceScene;
 const HERMESScene_ = window.HERMESScene;
+const AegisScene_ = window.AegisScene;
 const Completed_ = window.Completed;
 const Archive_ = window.Archive;
 const Writing_ = window.Writing;

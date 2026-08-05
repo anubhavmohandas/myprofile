@@ -86,8 +86,8 @@ function Constellation() {
     { id: "argus",   x: 78, y: 25, label: "ARGUS",   sub: "RECON",     group: 1 },
     { id: "nyx",     x: 50, y: 20, label: "NYX",     sub: "INTERFACE", group: 2 },
     { id: "ct",      x: 20, y: 78, label: "CYBERTRACE", sub: "OSINT",  group: 3 },
-    { id: "ghost",   x: 55, y: 82, label: "GHOST",   sub: "TOOLING",   group: 3 },
-    { id: "aegis",   x: 85, y: 78, label: "AEGIS",   sub: "ENDPOINT", group: 3 },
+    { id: "ghost",   x: 50, y: 85, label: "GHOST",   sub: "TOOLING",   group: 3 },
+    { id: "aegis",   x: 80, y: 78, label: "AEGIS",   sub: "ENDPOINT", group: 3 },
   ];
 
   // Edges revealed by step
@@ -100,7 +100,7 @@ function Constellation() {
   ];
 
   const steps = [
-    { num: "01", title: "An engine", body: "HERMES is the foundation — 20 modules across 5 layers. Research, memory, planning, browser, code review, security. The capability stack." },
+    { num: "01", title: "An engine", body: "HERMES is the foundation — 7 consolidated modules (Apollo, Mnemos, Clio, Curator, Fetcher, Connect, meta/security). Routing, memory, learning, cost tracking. The capability stack." },
     { num: "02", title: "A security layer", body: "SAGE watches code for CVEs and patches them autonomously. ARGUS scouts the web for recon signals. Both built on HERMES." },
     { num: "03", title: "An interface", body: "NYX is the voice on top — local-first, multi-model, multilingual. Calls SAGE and ARGUS as tools." },
     { num: "04", title: "And the standalone work", body: "CyberTrace for investigators. GHOST for the browser. Aegis watching the endpoint. Each its own product, each shipping value today." }

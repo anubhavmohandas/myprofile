@@ -34,6 +34,7 @@ function Nav({ theme, onToggleTheme }) {
     { href: 'nyx', label: 'NYX' },
     { href: 'cybertrace', label: 'CT' },
     { href: 'hermes', label: 'HERMES' },
+    { href: 'aegis', label: 'AEGIS' },
     { href: 'completed', label: 'Work' },
     { href: 'contact', label: 'Contact' }
   ];
@@ -111,6 +112,7 @@ function JourneyTrail() {
     { id: "nyx", label: "NYX" },
     { id: "cybertrace", label: "CYBERTRACE" },
     { id: "hermes", label: "HERMES" },
+    { id: "aegis", label: "AEGIS" },
     { id: "completed", label: "SHIPPED" },
     { id: "contact", label: "END" }
   ];

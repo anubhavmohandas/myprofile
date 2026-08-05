@@ -37,7 +37,10 @@ Fully local. No API keys phoning home. Voice-activated, multi-model fallback, sp
 One identifier in. Everything out. Email → breach history. BTC address → wallet graph. Phone → carrier + owner. IP → geolocation + Shodan exposure. GSTIN → business intel. 30+ sources across surface, deep, and dark web — queried in parallel, results merged and ranked.
 
 ### ◈ HERMES — *Hybrid Engine for Research, Memory, Execution & Synthesis*
-54 open-source patterns. 20 modules. 5 layers. One install. Built so Claude can do everything without switching contexts — research, write, remember, execute, synthesize.
+1,420 patterns pulled from 56 open-source repos, consolidated into 7 modules — Apollo, Mnemos, Clio, Curator, Fetcher, Connect, meta/security. Apollo, meta/security, Mnemos, and Curator are built and verified; Fetcher and Connect are next. One install. Built so Claude can do everything without switching contexts.
+
+### ◈ Aegis — *Cross-Platform AI Security Assistant*
+A resident endpoint monitor for macOS, Windows, and Linux — watches process launches, USB activity, startup persistence, and folders, scores severity locally before any AI call, and captures tamper evidence the moment someone tries to shut it off. Alpha: macOS-validated on real hardware; a signed public release is gated on Windows hardware validation.
 
 ---
 
@@ -52,7 +55,6 @@ One identifier in. Everything out. Email → breach history. BTC address → wal
 | **SIEM Kernel Exploit Detector** | Real-time APT and kernel-level exploit detection. |
 | **Digital Forensics Toolkit** | All-in-one investigation suite for cyber crime cases. |
 | **Enhanced CVSS Calculator** | Because the standard one isn't enough for real triage. |
-| **Aegis** | Cross-platform resident endpoint monitor — process/USB/startup/folder watching, local severity scoring, tamper evidence capture. Alpha, macOS-validated on real hardware; Windows hardware validation pending. |
 
 ---
 

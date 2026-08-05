@@ -34,7 +34,7 @@ const PORTFOLIO_DATA = {
   thesisStats: [
     { num: "08", lbl: "Autonomous systems in production or in flight" },
     { num: "13", lbl: "OSINT modules running concurrently in CyberTrace" },
-    { num: "54", lbl: "Open-source repos distilled into HERMES" }
+    { num: "56", lbl: "Open-source repos distilled into HERMES" }
   ],
 
   // Ongoing — get full pinned scrollytelling scenes
@@ -92,11 +92,34 @@ const PORTFOLIO_DATA = {
       codename: "ONGOING / 04",
       name: "HERMES",
       expand: "Hybrid Engine for Research, Memory, Execution & Synthesis",
-      tagline: "One install. Full capability stack. 54 open-source patterns distilled into 20 modules across 5 layers — so Claude can do everything from one skill.",
-      tags: ["Claude Skill", "Python", "Composio", "Playwright", "Tavily", "Karpathy-style"],
+      tagline: "One install. 1,420 patterns pulled from 56 open-source repos, consolidated into 7 modules — Apollo routes, Mnemos remembers, Curator learns, Clio tracks the cost, meta/ guards every tool call. Fetcher and Connect are next.",
+      tags: ["Claude Skill", "Python", "SQLite", "HNSW", "MCP", "Cron"],
       link: "https://github.com/anubhavmohandas",
-      modules: ["Research", "Codebase Memory", "Knowledge", "Autonomous Loop", "Browser", "Planner", "PDF Gen", "DOCX Gen", "XLSX Gen", "PPTX Gen", "Code Review", "Debug", "TDD", "Database", "Composio", "Tokens", "Caveman Mode", "Security", "Dep Track", "Media"],
-      layers: ["Interface", "Synthesis", "Execution", "Memory", "Discovery"]
+      modules: ["Apollo", "Mnemos", "Clio", "Curator", "Fetcher", "Connect", "meta/security"],
+      layers: [
+        { name: "Apollo", status: "built — routing real requests", done: true },
+        { name: "meta/security", status: "built — 7 defense layers", done: true },
+        { name: "Mnemos", status: "v1 + v2 built, HNSW verified", done: true },
+        { name: "Curator", status: "built — human-gated proposals", done: true },
+        { name: "Clio", status: "started", done: false },
+        { name: "Fetcher", status: "not built yet (Phase 3C)", done: false },
+        { name: "Connect", status: "not built yet (Phase 3C)", done: false }
+      ]
+    },
+    {
+      id: "aegis",
+      codename: "ONGOING / 05",
+      name: "AEGIS",
+      expand: "Cross-Platform AI Security Assistant",
+      tagline: "A resident endpoint monitor for macOS, Windows, and Linux — watches process launches, USB activity, startup persistence, and folders, scores severity locally before any AI call, and captures tamper evidence the moment someone tries to shut it off. Alpha: macOS-validated on real hardware; a signed public release is gated on Windows hardware validation.",
+      tags: ["Python", "Claude/OpenAI", "watchdog", "psutil", "SQLite", "pywebview", "VirusTotal", "MITRE ATT&CK"],
+      link: "https://github.com/anubhavmohandas/Aegis",
+      steps: [
+        { num: "01", title: "Watch", body: "Per-OS collectors stream process launches, USB activity, startup persistence, and recursive folder events onto a shared queue — real-time, not a polling gap.", viz: "→ collect" },
+        { num: "02", title: "Score", body: "Your trust list is skipped outright. Everything else is rated low to critical by a local severity heuristic and signal-corroboration engine — before any AI call happens.", viz: "Σ severity" },
+        { num: "03", title: "Explain", body: "Optional VirusTotal hash lookup and offline MITRE ATT&CK mapping enrich the event first. Claude or OpenAI turns it into a plain-English explanation.", viz: "Δ explain" },
+        { num: "04", title: "Evidence", body: "Repeated failed auth on a protected action — Stop Monitoring, Delete Evidence — triggers webcam and screenshot capture into a password-gated Incident.", viz: "✓ tamper-proof" }
+      ]
     }
   ],
 
@@ -136,15 +159,6 @@ const PORTFOLIO_DATA = {
       tags: ["CVSS", "Vulnerability Assessment", "Risk Management"],
       link: "https://github.com/anubhavmohandas/Enhanced-CVSS-Calculator",
       mock: "cvss"
-    },
-    {
-      id: "aegis",
-      name: "Aegis",
-      expand: "Cross-Platform AI Security Assistant",
-      blurb: "A resident endpoint monitor for macOS/Windows/Linux — watches process launches, USB activity, startup persistence, and watched folders, scores severity locally before any AI call, and captures webcam/screenshot evidence the moment someone tries to tamper with it. Alpha: macOS-validated on real hardware; signed public release is gated on Windows hardware validation.",
-      tags: ["Python", "Claude/OpenAI", "watchdog", "psutil", "SQLite", "pywebview", "VirusTotal", "MITRE ATT&CK"],
-      link: "https://github.com/anubhavmohandas/Aegis",
-      mock: "aegis"
     }
   ],
 

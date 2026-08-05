@@ -357,8 +357,8 @@ function Constellation() {
     { id: "argus",   x: 78, y: 25, label: "ARGUS",   sub: "RECON",     group: 1 },
     { id: "nyx",     x: 50, y: 20, label: "NYX",     sub: "INTERFACE", group: 2 },
     { id: "ct",      x: 20, y: 78, label: "CYBERTRACE", sub: "OSINT",  group: 3 },
-    { id: "ghost",   x: 55, y: 82, label: "GHOST",   sub: "TOOLING",   group: 3 },
-    { id: "aegis",   x: 85, y: 78, label: "AEGIS",   sub: "ENDPOINT", group: 3 },
+    { id: "ghost",   x: 50, y: 85, label: "GHOST",   sub: "TOOLING",   group: 3 },
+    { id: "aegis",   x: 80, y: 78, label: "AEGIS",   sub: "ENDPOINT", group: 3 },
   ];
 
   // Edges revealed by step
@@ -371,7 +371,7 @@ function Constellation() {
   ];
 
   const steps = [
-    { num: "01", title: "An engine", body: "HERMES is the foundation — 20 modules across 5 layers. Research, memory, planning, browser, code review, security. The capability stack." },
+    { num: "01", title: "An engine", body: "HERMES is the foundation — 7 consolidated modules (Apollo, Mnemos, Clio, Curator, Fetcher, Connect, meta/security). Routing, memory, learning, cost tracking. The capability stack." },
     { num: "02", title: "A security layer", body: "SAGE watches code for CVEs and patches them autonomously. ARGUS scouts the web for recon signals. Both built on HERMES." },
     { num: "03", title: "An interface", body: "NYX is the voice on top — local-first, multi-model, multilingual. Calls SAGE and ARGUS as tools." },
     { num: "04", title: "And the standalone work", body: "CyberTrace for investigators. GHOST for the browser. Aegis watching the endpoint. Each its own product, each shipping value today." }
@@ -843,11 +843,11 @@ function HERMESScene() {
     return () => ctx.revert();
   }, []);
 
-  const stepLabel = ["54 OPEN-SOURCE REPOS", "20 MODULES", "5 LAYERS"];
+  const stepLabel = ["56 OPEN-SOURCE REPOS", "7 MODULES", "BUILD STATUS"];
   const stepTitle = [
     "Start with everything.",
-    "Distill the patterns.",
-    "Compose the engine."
+    "Consolidate the pattern set.",
+    "Prove what's actually built."
   ];
 
   return (
@@ -877,7 +877,7 @@ function HERMESScene() {
           <div className="hermes-viz">
             <div className={`hermes-layer ${step === 0 ? 'active' : ''}`}>
               <div className="hermes-repos">
-                {Array.from({ length: 54 }).map((_, i) => (
+                {Array.from({ length: 56 }).map((_, i) => (
                   <div key={i} className="hermes-repo" />
                 ))}
               </div>
@@ -894,9 +894,9 @@ function HERMESScene() {
             <div className={`hermes-layer ${step === 2 ? 'active' : ''}`}>
               <div className="hermes-layers">
                 {D.layers.map((l, i) => (
-                  <div key={i} className="hermes-layer-row">
-                    <span>{l}</span>
-                    <span className="lbl-num">L{i + 1}</span>
+                  <div key={i} className={`hermes-layer-row ${l.done ? 'done' : 'pending'}`}>
+                    <span>{l.name} <span style={{ color: 'var(--ink-3)', fontWeight: 400 }}>— {l.status}</span></span>
+                    <span className="lbl-num">{l.done ? '✓' : '…'}</span>
                   </div>
                 ))}
               </div>
@@ -908,9 +908,92 @@ function HERMESScene() {
   );
 }
 
+// ---------- AEGIS ----------
+function AegisScene() {
+  const rootRef = useRef(null);
+  const [activeStep, setActiveStep] = useState(0);
+  const D = window.PORTFOLIO_DATA.ongoing.find(p => p.id === "aegis");
+
+  useEffect(() => {
+    const ctx = window.gsap.context(() => {
+      const trigger = window.ScrollTrigger.create({
+        trigger: rootRef.current,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.3,
+        onUpdate: (self) => setActiveStep(Math.min(3, Math.floor(self.progress * 4.001)))
+      });
+      return () => trigger.kill();
+    }, rootRef);
+    return () => ctx.revert();
+  }, []);
+
+  const cardVizText = [
+    "● process.launch\n● usb.connect\n● folder.write",
+    "LOW · MEDIUM · HIGH\nCRITICAL",
+    "Verdict: Review Suggested\nConfidence: High",
+    "🔒 Incident #04 captured"
+  ];
+
+  return (
+    <section ref={rootRef} className="scene" id="aegis" data-screen-label="09 AEGIS">
+      <div className="scene-pin">
+        <div className="scene-sidebar">
+          <div>
+            <div className="scene-eyebrow">
+              <span className="scene-codename">{D.codename}</span>
+            </div>
+            <h2 className="scene-title">{D.name}</h2>
+            <p className="t-mono" style={{ marginTop: 12, color: 'var(--accent-warm)' }}>
+              {D.expand}
+            </p>
+            <p className="scene-blurb" style={{ marginTop: 24 }}>{D.tagline}</p>
+            <div className="scene-tags">
+              {D.tags.map(t => <span key={t} className="scene-tag">{t}</span>)}
+            </div>
+          </div>
+          <a className="scene-link" href={D.link} target="_blank" rel="noreferrer">View on GitHub →</a>
+        </div>
+
+        <div className="scene-stage aegis-stage">
+          <div className="scene-step-counter">
+            <span className="cur">{String(activeStep + 1).padStart(2, '0')}</span> / 04
+          </div>
+
+          <div className={`aegis-video ${activeStep >= 0 ? 'lit' : ''}`}>
+            <video src="assets/aegis-hero.mp4" poster="assets/aegis-hero.jpg" muted autoPlay loop playsInline />
+            <div className="aegis-video-badge">
+              <span className="aegis-video-dot" />
+              MONITORING ACTIVE
+            </div>
+          </div>
+
+          <div className="aegis-pipe">
+            {D.steps.map((s, i) => (
+              <div key={i} className={`aegis-card ${i === activeStep ? 'active' : ''} ${i < activeStep ? 'done' : ''}`}>
+                <div className="aegis-card-num">STEP {s.num}</div>
+                <div className="aegis-card-title">{s.title}</div>
+                <div className="aegis-card-body">{s.body}</div>
+                <div className="aegis-card-viz">
+                  {cardVizText[i].split('\n').map((line, li) => <div key={li}>{line}</div>)}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="scene-progress">
+            <div className="scene-progress-bar" style={{ width: `${((activeStep + 1) / 4) * 100}%`, transition: 'width 0.4s' }} />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 window.NYXScene = NYXScene;
 window.CyberTraceScene = CyberTraceScene;
 window.HERMESScene = HERMESScene;
+window.AegisScene = AegisScene;
 
 
 // ---- scenes-4.jsx ----
@@ -944,7 +1027,7 @@ function Completed() {
   const D = window.PORTFOLIO_DATA.completed;
 
   return (
-    <section ref={rootRef} className="completed" id="completed" data-screen-label="09 Completed">
+    <section ref={rootRef} className="completed" id="completed" data-screen-label="10 Completed">
       <div className="section-eyebrow-row">
         <div>
           <div className="eyebrow-row">
@@ -1046,15 +1129,6 @@ function CompletedCard({ project: p }) {
             </div>
           </div>
         )}
-        {p.mock === "aegis" && (
-          <video
-            className="completed-card-video"
-            src="assets/aegis-hero.mp4"
-            poster="assets/aegis-hero.jpg"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            muted autoPlay loop playsInline
-          />
-        )}
       </div>
       <div>
         <div className="t-mono" style={{ color: 'var(--accent)', fontSize: 11, letterSpacing: '0.15em' }}>
@@ -1095,7 +1169,7 @@ function Archive() {
   }, []);
 
   return (
-    <section ref={rootRef} className="archive" id="archive" data-screen-label="10 Archive">
+    <section ref={rootRef} className="archive" id="archive" data-screen-label="11 Archive">
       <div className="section-eyebrow-row">
         <div>
           <div className="eyebrow-row">
@@ -1156,7 +1230,7 @@ function Writing() {
   }, []);
 
   return (
-    <section ref={rootRef} className="writing" id="writing" data-screen-label="11 Writing">
+    <section ref={rootRef} className="writing" id="writing" data-screen-label="12 Writing">
       <div className="section-eyebrow-row">
         <div>
           <div className="eyebrow-row">
@@ -1239,7 +1313,7 @@ function Contact() {
   ];
 
   return (
-    <section ref={rootRef} className="contact" id="contact" data-screen-label="12 Contact">
+    <section ref={rootRef} className="contact" id="contact" data-screen-label="13 Contact">
       <h2 className="contact-headline">
         <span className="word">Let's</span>{' '}
         <span className="word">build</span>{' '}
@@ -1328,6 +1402,7 @@ function Nav({ theme, onToggleTheme }) {
     { href: 'nyx', label: 'NYX' },
     { href: 'cybertrace', label: 'CT' },
     { href: 'hermes', label: 'HERMES' },
+    { href: 'aegis', label: 'AEGIS' },
     { href: 'completed', label: 'Work' },
     { href: 'contact', label: 'Contact' }
   ];
@@ -1405,6 +1480,7 @@ function JourneyTrail() {
     { id: "nyx", label: "NYX" },
     { id: "cybertrace", label: "CYBERTRACE" },
     { id: "hermes", label: "HERMES" },
+    { id: "aegis", label: "AEGIS" },
     { id: "completed", label: "SHIPPED" },
     { id: "contact", label: "END" }
   ];
@@ -1647,6 +1723,7 @@ function App() {
         <NYXScene_ />
         <CyberTraceScene_ />
         <HERMESScene_ />
+        <AegisScene_ />
         <Completed_ />
         <Archive_ />
         <Writing_ />
@@ -1781,6 +1858,7 @@ const SAGEScene_ = window.SAGEScene;
 const NYXScene_ = window.NYXScene;
 const CyberTraceScene_ = window.CyberTraceScene;
 const HERMESScene_ = window.HERMESScene;
+const AegisScene_ = window.AegisScene;
 const Completed_ = window.Completed;
 const Archive_ = window.Archive;
 const Writing_ = window.Writing;

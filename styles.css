@@ -991,6 +991,151 @@ button {
 }
 
 /* ============================================================
+   AEGIS scene — same shape as SAGE, real hero clip instead of graph
+   ============================================================ */
+
+#aegis.scene { height: 360vh; }
+
+.aegis-stage {
+  display: grid;
+  grid-template-rows: minmax(200px, 1fr) auto;
+  align-items: stretch;
+  padding: 48px var(--gutter);
+  gap: 24px;
+}
+
+.aegis-video {
+  position: relative;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #050505;
+  min-height: 200px;
+  transition: border-color 0.5s, box-shadow 0.5s;
+}
+.aegis-video.lit {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(255,94,26,0.25), 0 40px 100px -30px rgba(255,94,26,0.3);
+}
+.aegis-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  opacity: 0.92;
+}
+.aegis-video-badge {
+  position: absolute;
+  top: 16px; left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--ink);
+  background: rgba(6, 8, 16, 0.8);
+  backdrop-filter: blur(8px);
+  padding: 6px 12px;
+  border: 1px solid var(--rule-2);
+  border-radius: 99px;
+  text-transform: uppercase;
+}
+.aegis-video-dot {
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent);
+  animation: blink 1.6s ease-in-out infinite;
+}
+
+.aegis-pipe {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  align-items: stretch;
+  flex-shrink: 0;
+}
+
+.aegis-card {
+  border: 1px solid var(--rule);
+  background: var(--bg-elev);
+  border-radius: 6px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  opacity: 0.4;
+  transition: opacity 0.4s, border-color 0.4s, background 0.4s;
+}
+.aegis-card.active {
+  opacity: 1;
+  border-color: var(--accent);
+  background: linear-gradient(180deg, rgba(255,94,26,0.05), transparent 60%), var(--bg-elev);
+  box-shadow: 0 0 0 1px rgba(255,94,26,0.2), 0 30px 80px -20px rgba(255,94,26,0.2);
+}
+.aegis-card.done { opacity: 0.8; }
+.aegis-card.done .aegis-card-num { color: var(--accent); }
+
+.aegis-card-num {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+}
+.aegis-card.active .aegis-card-num { color: var(--accent); }
+
+.aegis-card-title {
+  font-family: var(--f-display);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.aegis-card-body {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--ink-2);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.aegis-card-viz {
+  min-height: 100px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  color: var(--accent);
+  text-align: center;
+  padding: 8px;
+  gap: 2px;
+}
+
+@media (max-width: 1100px) {
+  .aegis-pipe { grid-template-columns: repeat(2, 1fr); max-height: none; }
+}
+@media (max-width: 600px) {
+  .aegis-pipe { grid-template-columns: 1fr; }
+}
+@media (max-height: 760px) {
+  .aegis-stage { padding: 24px var(--gutter); gap: 14px; }
+  .aegis-card { padding: 12px; gap: 6px; }
+  .aegis-card-body { display: none; }
+  .aegis-card-title { font-size: 16px; }
+}
+
+/* ============================================================
    NYX scene
    ============================================================ */
 
@@ -1292,8 +1437,8 @@ button {
 }
 .hermes-layer-row {
   padding: 18px 24px;
-  border: 1px solid var(--accent);
-  background: var(--accent-soft);
+  border: 1px solid var(--rule);
+  background: var(--bg-elev);
   border-radius: 6px;
   font-family: var(--f-mono);
   font-size: 13px;
@@ -1301,8 +1446,15 @@ button {
   letter-spacing: 0.05em;
   display: flex;
   justify-content: space-between;
+  opacity: 0.6;
 }
-.hermes-layer-row .lbl-num { color: var(--accent); }
+.hermes-layer-row.done {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  opacity: 1;
+}
+.hermes-layer-row.done .lbl-num { color: var(--accent); }
+.hermes-layer-row.pending .lbl-num { color: var(--ink-3); }
 
 @media (max-width: 700px) {
   .hermes-repos { grid-template-columns: repeat(6, 1fr); }

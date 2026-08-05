@@ -235,11 +235,11 @@ function HERMESScene() {
     return () => ctx.revert();
   }, []);
 
-  const stepLabel = ["54 OPEN-SOURCE REPOS", "20 MODULES", "5 LAYERS"];
+  const stepLabel = ["56 OPEN-SOURCE REPOS", "7 MODULES", "BUILD STATUS"];
   const stepTitle = [
     "Start with everything.",
-    "Distill the patterns.",
-    "Compose the engine."
+    "Consolidate the pattern set.",
+    "Prove what's actually built."
   ];
 
   return (
@@ -269,7 +269,7 @@ function HERMESScene() {
           <div className="hermes-viz">
             <div className={`hermes-layer ${step === 0 ? 'active' : ''}`}>
               <div className="hermes-repos">
-                {Array.from({ length: 54 }).map((_, i) => (
+                {Array.from({ length: 56 }).map((_, i) => (
                   <div key={i} className="hermes-repo" />
                 ))}
               </div>
@@ -286,9 +286,9 @@ function HERMESScene() {
             <div className={`hermes-layer ${step === 2 ? 'active' : ''}`}>
               <div className="hermes-layers">
                 {D.layers.map((l, i) => (
-                  <div key={i} className="hermes-layer-row">
-                    <span>{l}</span>
-                    <span className="lbl-num">L{i + 1}</span>
+                  <div key={i} className={`hermes-layer-row ${l.done ? 'done' : 'pending'}`}>
+                    <span>{l.name} <span style={{ color: 'var(--ink-3)', fontWeight: 400 }}>— {l.status}</span></span>
+                    <span className="lbl-num">{l.done ? '✓' : '…'}</span>
                   </div>
                 ))}
               </div>
@@ -300,6 +300,89 @@ function HERMESScene() {
   );
 }
 
+// ---------- AEGIS ----------
+function AegisScene() {
+  const rootRef = useRef(null);
+  const [activeStep, setActiveStep] = useState(0);
+  const D = window.PORTFOLIO_DATA.ongoing.find(p => p.id === "aegis");
+
+  useEffect(() => {
+    const ctx = window.gsap.context(() => {
+      const trigger = window.ScrollTrigger.create({
+        trigger: rootRef.current,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.3,
+        onUpdate: (self) => setActiveStep(Math.min(3, Math.floor(self.progress * 4.001)))
+      });
+      return () => trigger.kill();
+    }, rootRef);
+    return () => ctx.revert();
+  }, []);
+
+  const cardVizText = [
+    "● process.launch\n● usb.connect\n● folder.write",
+    "LOW · MEDIUM · HIGH\nCRITICAL",
+    "Verdict: Review Suggested\nConfidence: High",
+    "🔒 Incident #04 captured"
+  ];
+
+  return (
+    <section ref={rootRef} className="scene" id="aegis" data-screen-label="09 AEGIS">
+      <div className="scene-pin">
+        <div className="scene-sidebar">
+          <div>
+            <div className="scene-eyebrow">
+              <span className="scene-codename">{D.codename}</span>
+            </div>
+            <h2 className="scene-title">{D.name}</h2>
+            <p className="t-mono" style={{ marginTop: 12, color: 'var(--accent-warm)' }}>
+              {D.expand}
+            </p>
+            <p className="scene-blurb" style={{ marginTop: 24 }}>{D.tagline}</p>
+            <div className="scene-tags">
+              {D.tags.map(t => <span key={t} className="scene-tag">{t}</span>)}
+            </div>
+          </div>
+          <a className="scene-link" href={D.link} target="_blank" rel="noreferrer">View on GitHub →</a>
+        </div>
+
+        <div className="scene-stage aegis-stage">
+          <div className="scene-step-counter">
+            <span className="cur">{String(activeStep + 1).padStart(2, '0')}</span> / 04
+          </div>
+
+          <div className={`aegis-video ${activeStep >= 0 ? 'lit' : ''}`}>
+            <video src="assets/aegis-hero.mp4" poster="assets/aegis-hero.jpg" muted autoPlay loop playsInline />
+            <div className="aegis-video-badge">
+              <span className="aegis-video-dot" />
+              MONITORING ACTIVE
+            </div>
+          </div>
+
+          <div className="aegis-pipe">
+            {D.steps.map((s, i) => (
+              <div key={i} className={`aegis-card ${i === activeStep ? 'active' : ''} ${i < activeStep ? 'done' : ''}`}>
+                <div className="aegis-card-num">STEP {s.num}</div>
+                <div className="aegis-card-title">{s.title}</div>
+                <div className="aegis-card-body">{s.body}</div>
+                <div className="aegis-card-viz">
+                  {cardVizText[i].split('\n').map((line, li) => <div key={li}>{line}</div>)}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="scene-progress">
+            <div className="scene-progress-bar" style={{ width: `${((activeStep + 1) / 4) * 100}%`, transition: 'width 0.4s' }} />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 window.NYXScene = NYXScene;
 window.CyberTraceScene = CyberTraceScene;
+window.AegisScene = AegisScene;
 window.HERMESScene = HERMESScene;

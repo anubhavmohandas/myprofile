@@ -46,7 +46,7 @@ const PORTFOLIO_DATA = {
       expand: "Security Analysis & Graph Engine",
       tagline: "An autonomous security pipeline that monitors code, maps transitive CVE exposure, generates validated patches, and raises GitHub PRs — without human intervention.",
       tags: ["Python", "Claude", "Semgrep", "tree-sitter", "NetworkX", "NVD API", "GitHub"],
-      link: "https://github.com/anubhavmohandas",
+      link: "https://github.com/anubhavmohandas/SAGE",
       steps: [
         { num: "01", title: "Watch", body: "Daily poll of NVD for new CVEs. Filtered against the actual transitive dependency chain — not just direct imports.", viz: "→ NVD" },
         { num: "02", title: "Map", body: "Synapse — a tree-sitter + NetworkX code graph — locates every function in the blast radius. Only those reach the LLM.", viz: "Σ Synapse" },
@@ -65,29 +65,13 @@ const PORTFOLIO_DATA = {
       // see component
     },
     {
-      id: "midas",
-      codename: "ONGOING / 03",
-      name: "MIDAS",
-      expand: "Market Intelligence, Discovery & Autonomous SaaS-builder",
-      tagline: "An overnight pipeline that discovers consumer pain points, validates willingness to pay, and ships full SaaS products to Vercel — autonomously.",
-      tags: ["Python", "FastAPI", "Supabase", "Stripe", "Vercel", "Claude", "Kimi K2.6"],
-      link: "https://github.com/anubhavmohandas",
-      phases: [
-        { num: "P1", title: "Discover", desc: "Mine pain signals overnight from Reddit, Twitter/X, ProductHunt, App Store, Quora, Google Trends.", icons: ["reddit", "x", "ph", "appstore"] },
-        { num: "P2", title: "Score", desc: "Rank by market size, competition density, willingness-to-pay signals. Filter for buildable + monetizable.", icons: ["data"] },
-        { num: "P3", title: "Validate", desc: "Cold outreach to confirm demand. No code is written until people say yes.", icons: ["email"] },
-        { num: "P4", title: "Build", desc: "Auto-scaffold landing page, FastAPI backend, Supabase auth, Stripe billing. Ship to Vercel on push.", icons: ["fastapi", "supabase", "stripe", "vercel"] },
-        { num: "P5", title: "Launch", desc: "ProductHunt listing, social distribution, waitlist email blast. The product is live by morning.", icons: ["ph", "x"] }
-      ]
-    },
-    {
       id: "cybertrace",
-      codename: "ONGOING / 04",
+      codename: "ONGOING / 03",
       name: "CyberTrace",
       expand: "OSINT Intelligence Platform",
       tagline: "Give it any identifier — email, BTC address, phone, IP, GSTIN — and it queries 30+ surface, deep, and dark web sources in parallel.",
       tags: ["Python", "aiohttp", "asyncio", "TOR", "OSINT", "Async"],
-      link: "https://github.com/anubhavmohandas",
+      link: "https://github.com/anubhavmohandas/CyberTrace",
       modules: [
         { name: "Email Breach", srcs: "HIBP · DeHashed" },
         { name: "Phone Intel", srcs: "Truecaller · NumLookup" },
@@ -105,7 +89,7 @@ const PORTFOLIO_DATA = {
     },
     {
       id: "hermes",
-      codename: "ONGOING / 05",
+      codename: "ONGOING / 04",
       name: "HERMES",
       expand: "Hybrid Engine for Research, Memory, Execution & Synthesis",
       tagline: "One install. Full capability stack. 54 open-source patterns distilled into 20 modules across 5 layers — so Claude can do everything from one skill.",
@@ -123,7 +107,7 @@ const PORTFOLIO_DATA = {
       expand: "General Handler of Stored Templates",
       blurb: "A Chrome/Brave extension that intelligently autofills 80+ field types across the web using AES-256-GCM encrypted local profiles. Includes a Tatkal booking module for IRCTC's Angular monolith — reverse-engineered, no public API.",
       tags: ["Chrome MV3", "Web Crypto API", "AES-GCM", "Angular Interop", "Service Workers"],
-      link: "https://github.com/anubhavmohandas",
+      link: "https://github.com/anubhavmohandas/GHOST",
       mock: "ghost"
     },
     {
@@ -152,6 +136,15 @@ const PORTFOLIO_DATA = {
       tags: ["CVSS", "Vulnerability Assessment", "Risk Management"],
       link: "https://github.com/anubhavmohandas/Enhanced-CVSS-Calculator",
       mock: "cvss"
+    },
+    {
+      id: "aegis",
+      name: "Aegis",
+      expand: "Cross-Platform AI Security Assistant",
+      blurb: "A resident endpoint monitor for macOS/Windows/Linux — watches process launches, USB activity, startup persistence, and watched folders, scores severity locally before any AI call, and captures webcam/screenshot evidence the moment someone tries to tamper with it. Alpha: macOS-validated on real hardware; signed public release is gated on Windows hardware validation.",
+      tags: ["Python", "Claude/OpenAI", "watchdog", "psutil", "SQLite", "pywebview", "VirusTotal", "MITRE ATT&CK"],
+      link: "https://github.com/anubhavmohandas/Aegis",
+      mock: "aegis"
     }
   ],
 
@@ -204,41 +197,6 @@ const PORTFOLIO_DATA = {
       blurb: "Web-based detection for identifying threats, malicious activities, and anomalous behavior in real-time traffic.",
       tags: ["Web Sec", "Threat Detection", "Anomaly"],
       link: "https://github.com/anubhavmohandas/web_detection"
-    }
-  ],
-
-  stack: [
-    {
-      group: "Languages",
-      items: ["Python", "JavaScript", "TypeScript", "Bash", "PowerShell"]
-    },
-    {
-      group: "AI / LLM",
-      items: ["Claude API", "Ollama", "Qwen 3.5", "Mistral", "LangChain", "Composio", "Fine-tuning", "RAG"]
-    },
-    {
-      group: "Backend / Infra",
-      items: ["FastAPI", "Supabase", "PostgreSQL", "SQLite", "Stripe", "Vercel", "Netlify", "Docker"]
-    },
-    {
-      group: "Security",
-      items: ["Semgrep", "YARA", "Burp Suite", "Wireshark", "Metasploit", "Nmap", "Autopsy", "Wazuh", "Splunk"]
-    },
-    {
-      group: "OSINT",
-      items: ["TheHarvester", "Amass", "AssetFinder", "Maltego", "Shodan", "TOR", "PGP-signed onion directories"]
-    },
-    {
-      group: "Web / Frontend",
-      items: ["React", "Vite", "Tailwind", "GSAP", "Three.js", "Chrome Extension MV3", "Web Crypto API"]
-    },
-    {
-      group: "Code Intelligence",
-      items: ["tree-sitter", "NetworkX", "Semgrep", "AST parsing", "Knowledge graphs"]
-    },
-    {
-      group: "OS",
-      items: ["Kali Linux", "Ubuntu", "Red Hat", "macOS", "Windows"]
     }
   ],
 

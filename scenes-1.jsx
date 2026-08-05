@@ -78,7 +78,7 @@ function Hero() {
         <div className="hero-meta-bot">
           <div className="t-mono">
             <div style={{ color: 'var(--ink-3)' }}>NOW SHIPPING</div>
-            <div>SAGE · NYX · MIDAS · HERMES</div>
+            <div>SAGE · NYX · HERMES · AEGIS</div>
           </div>
           <div className="t-mono" style={{ textAlign: 'right' }}>
             <div style={{ color: 'var(--ink-3)' }}>EST.</div>

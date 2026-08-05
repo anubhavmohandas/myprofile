@@ -33,9 +33,6 @@ CVE drops. SAGE wakes up. It maps your entire transitive dependency graph using 
 ### ◈ NYX — *Personal AI Assistant*
 Fully local. No API keys phoning home. Voice-activated, multi-model fallback, speaks Hindi / English / Hinglish / Malayalam. The anti-cloud AI assistant — because why trust your conversations to someone else's server?
 
-### ◈ MIDAS — *Market Intelligence, Discovery & Autonomous SaaS-builder*
-Goes to sleep, mines Reddit / Twitter / ProductHunt / App Store for pain signals, validates willingness-to-pay through cold outreach, scaffolds a FastAPI + Supabase + Stripe stack, ships to Vercel, posts to ProductHunt. Wakes you up with a live product. Overnight.
-
 ### ◈ CyberTrace — *OSINT Intelligence Platform*
 One identifier in. Everything out. Email → breach history. BTC address → wallet graph. Phone → carrier + owner. IP → geolocation + Shodan exposure. GSTIN → business intel. 30+ sources across surface, deep, and dark web — queried in parallel, results merged and ranked.
 
@@ -55,6 +52,7 @@ One identifier in. Everything out. Email → breach history. BTC address → wal
 | **SIEM Kernel Exploit Detector** | Real-time APT and kernel-level exploit detection. |
 | **Digital Forensics Toolkit** | All-in-one investigation suite for cyber crime cases. |
 | **Enhanced CVSS Calculator** | Because the standard one isn't enough for real triage. |
+| **Aegis** | Cross-platform resident endpoint monitor — process/USB/startup/folder watching, local severity scoring, tamper evidence capture. Alpha, macOS-validated on real hardware; Windows hardware validation pending. |
 
 ---
 

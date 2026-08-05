@@ -29,7 +29,7 @@ function Completed() {
   const D = window.PORTFOLIO_DATA.completed;
 
   return (
-    <section ref={rootRef} className="completed" id="completed" data-screen-label="10 Completed">
+    <section ref={rootRef} className="completed" id="completed" data-screen-label="09 Completed">
       <div className="section-eyebrow-row">
         <div>
           <div className="eyebrow-row">
@@ -131,6 +131,15 @@ function CompletedCard({ project: p }) {
             </div>
           </div>
         )}
+        {p.mock === "aegis" && (
+          <video
+            className="completed-card-video"
+            src="assets/aegis-hero.mp4"
+            poster="assets/aegis-hero.jpg"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            muted autoPlay loop playsInline
+          />
+        )}
       </div>
       <div>
         <div className="t-mono" style={{ color: 'var(--accent)', fontSize: 11, letterSpacing: '0.15em' }}>
@@ -171,7 +180,7 @@ function Archive() {
   }, []);
 
   return (
-    <section ref={rootRef} className="archive" id="archive" data-screen-label="11 Archive">
+    <section ref={rootRef} className="archive" id="archive" data-screen-label="10 Archive">
       <div className="section-eyebrow-row">
         <div>
           <div className="eyebrow-row">
@@ -208,66 +217,6 @@ function Archive() {
   );
 }
 
-// ---------- Stack ----------
-function Stack() {
-  const rootRef = useRef(null);
-  const D = window.PORTFOLIO_DATA.stack;
-
-  useEffect(() => {
-    const ctx = window.gsap.context(() => {
-      const groups = rootRef.current.querySelectorAll('.stack-group');
-      groups.forEach(g => {
-        const items = g.querySelectorAll('li');
-        window.gsap.to(items, {
-          scrollTrigger: {
-            trigger: g,
-            start: "top 80%"
-          },
-          opacity: 1,
-          x: 0,
-          stagger: 0.02,
-          duration: 0.4,
-          ease: "power2.out",
-          onStart: () => items.forEach(it => it.classList.add('lit'))
-        });
-      });
-    }, rootRef);
-    return () => ctx.revert();
-  }, []);
-
-  return (
-    <section ref={rootRef} className="stack" id="stack" data-screen-label="12 Stack">
-      <div className="section-eyebrow-row">
-        <div>
-          <div className="eyebrow-row">
-            <span className="eyebrow-dot" />
-            <span className="t-hairline">005 — STACK</span>
-          </div>
-          <h2 className="t-h1" style={{ marginTop: 16, maxWidth: '14ch' }}>
-            The <span className="t-serif-italic" style={{ color: 'var(--accent-warm)' }}>inventory.</span>
-          </h2>
-        </div>
-        <div style={{ maxWidth: 320 }}>
-          <p className="t-body">
-            No icons. No badges. Just what I use, daily.
-          </p>
-        </div>
-      </div>
-
-      <div className="stack-grid">
-        {D.map(g => (
-          <div key={g.group} className="stack-group">
-            <div className="stack-group-title">{g.group}</div>
-            <ul>
-              {g.items.map(it => <li key={it}>{it}</li>)}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 // ---------- Writing ----------
 function Writing() {
   const rootRef = useRef(null);
@@ -292,12 +241,12 @@ function Writing() {
   }, []);
 
   return (
-    <section ref={rootRef} className="writing" id="writing" data-screen-label="13 Writing">
+    <section ref={rootRef} className="writing" id="writing" data-screen-label="11 Writing">
       <div className="section-eyebrow-row">
         <div>
           <div className="eyebrow-row">
             <span className="eyebrow-dot" />
-            <span className="t-hairline">006 — WRITING</span>
+            <span className="t-hairline">005 — WRITING</span>
           </div>
           <h2 className="t-h1" style={{ marginTop: 16, maxWidth: '14ch' }}>
             Thinking <span className="t-serif-italic" style={{ color: 'var(--accent-warm)' }}>out loud.</span>
@@ -375,7 +324,7 @@ function Contact() {
   ];
 
   return (
-    <section ref={rootRef} className="contact" id="contact" data-screen-label="14 Contact">
+    <section ref={rootRef} className="contact" id="contact" data-screen-label="12 Contact">
       <h2 className="contact-headline">
         <span className="word">Let's</span>{' '}
         <span className="word">build</span>{' '}
@@ -424,6 +373,5 @@ function Contact() {
 
 window.Completed = Completed;
 window.Archive = Archive;
-window.Stack = Stack;
 window.Writing = Writing;
 window.Contact = Contact;

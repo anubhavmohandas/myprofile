@@ -1,5 +1,5 @@
 // ============================================================
-// SCENES 3 — NYX, MIDAS, CyberTrace, HERMES
+// SCENES 3 — NYX, CyberTrace, HERMES
 // ============================================================
 
 const { useEffect, useRef, useState } = React;
@@ -27,7 +27,7 @@ function NYXScene() {
   const transcripts = [
     "",
     "scan github.com/...",
-    "scan github.com/anubhavmohandas/midas for cves",
+    "scan github.com/anubhavmohandas/Aegis for cves",
     "Found 2 transitive CVEs in lodash@4.17.20. SAGE is patching now — PR will open in ~90 seconds."
   ];
 
@@ -137,67 +137,6 @@ function NYXScene() {
   );
 }
 
-// ---------- MIDAS ----------
-function MIDASScene() {
-  const rootRef = useRef(null);
-  const [step, setStep] = useState(0);
-  const D = window.PORTFOLIO_DATA.ongoing.find(p => p.id === "midas");
-
-  useEffect(() => {
-    const ctx = window.gsap.context(() => {
-      const trigger = window.ScrollTrigger.create({
-        trigger: rootRef.current,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 0.3,
-        onUpdate: (self) => setStep(Math.min(4, Math.floor(self.progress * 5.001)))
-      });
-      return () => trigger.kill();
-    }, rootRef);
-    return () => ctx.revert();
-  }, []);
-
-  return (
-    <section ref={rootRef} className="scene" id="midas" data-screen-label="07 MIDAS">
-      <div className="scene-pin">
-        <div className="scene-sidebar">
-          <div>
-            <div className="scene-eyebrow">
-              <span className="scene-codename">{D.codename}</span>
-            </div>
-            <h2 className="scene-title">{D.name}</h2>
-            <p className="t-mono" style={{ marginTop: 12, color: 'var(--accent-warm)' }}>
-              {D.expand}
-            </p>
-            <p className="scene-blurb" style={{ marginTop: 24 }}>{D.tagline}</p>
-            <div className="scene-tags">
-              {D.tags.map(t => <span key={t} className="scene-tag">{t}</span>)}
-            </div>
-          </div>
-          <a className="scene-link" href={D.link} target="_blank" rel="noreferrer">View on GitHub →</a>
-        </div>
-
-        <div className="scene-stage midas-stage">
-          <div className="scene-step-counter">
-            <span className="cur">P{step + 1}</span> / P5
-          </div>
-          {D.phases.map((p, i) => (
-            <div key={i} className={`midas-phase ${i === step ? 'active' : ''}`}>
-              <div className="midas-phase-num">{p.num}</div>
-              <div>
-                <div className="midas-phase-title">{p.title}</div>
-                <div className="midas-phase-desc">{p.desc}</div>
-              </div>
-              <div className="midas-phase-icons">
-                {p.icons.map(ic => <span key={ic}>· {ic}</span>)}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 // ---------- CyberTrace ----------
 function CyberTraceScene() {
@@ -224,7 +163,7 @@ function CyberTraceScene() {
   const typedLen = step === 0 ? Math.floor((Date.now() % 4000 / 4000) * inputText.length) : inputText.length;
 
   return (
-    <section ref={rootRef} className="scene" id="cybertrace" data-screen-label="08 CyberTrace">
+    <section ref={rootRef} className="scene" id="cybertrace" data-screen-label="07 CyberTrace">
       <div className="scene-pin">
         <div className="scene-sidebar">
           <div>
@@ -304,7 +243,7 @@ function HERMESScene() {
   ];
 
   return (
-    <section ref={rootRef} className="scene" id="hermes" data-screen-label="09 HERMES">
+    <section ref={rootRef} className="scene" id="hermes" data-screen-label="08 HERMES">
       <div className="scene-pin">
         <div className="scene-sidebar">
           <div>
@@ -362,6 +301,5 @@ function HERMESScene() {
 }
 
 window.NYXScene = NYXScene;
-window.MIDASScene = MIDASScene;
 window.CyberTraceScene = CyberTraceScene;
 window.HERMESScene = HERMESScene;

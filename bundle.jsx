@@ -82,7 +82,7 @@ function Hero() {
         <div className="hero-meta-bot">
           <div className="t-mono">
             <div style={{ color: 'var(--ink-3)' }}>NOW SHIPPING</div>
-            <div>SAGE · NYX · MIDAS · HERMES</div>
+            <div>SAGE · NYX · HERMES · AEGIS</div>
           </div>
           <div className="t-mono" style={{ textAlign: 'right' }}>
             <div style={{ color: 'var(--ink-3)' }}>EST.</div>
@@ -356,9 +356,9 @@ function Constellation() {
     { id: "sage",    x: 22, y: 25, label: "SAGE",    sub: "SECURITY",  group: 1 },
     { id: "argus",   x: 78, y: 25, label: "ARGUS",   sub: "RECON",     group: 1 },
     { id: "nyx",     x: 50, y: 20, label: "NYX",     sub: "INTERFACE", group: 2 },
-    { id: "midas",   x: 50, y: 82, label: "MIDAS",   sub: "AUTONOMY",  group: 3 },
-    { id: "ct",      x: 12, y: 70, label: "CYBERTRACE", sub: "OSINT",  group: 4 },
-    { id: "ghost",   x: 88, y: 70, label: "GHOST",   sub: "TOOLING",   group: 4 },
+    { id: "ct",      x: 20, y: 78, label: "CYBERTRACE", sub: "OSINT",  group: 3 },
+    { id: "ghost",   x: 55, y: 82, label: "GHOST",   sub: "TOOLING",   group: 3 },
+    { id: "aegis",   x: 85, y: 78, label: "AEGIS",   sub: "ENDPOINT", group: 3 },
   ];
 
   // Edges revealed by step
@@ -368,16 +368,13 @@ function Constellation() {
     { from: "hermes", to: "nyx",    step: 2 },
     { from: "sage",   to: "nyx",    step: 2, dashed: true },
     { from: "argus",  to: "nyx",    step: 2, dashed: true },
-    { from: "hermes", to: "midas",  step: 3 },
-    { from: "argus",  to: "midas",  step: 3, dashed: true },
   ];
 
   const steps = [
     { num: "01", title: "An engine", body: "HERMES is the foundation — 20 modules across 5 layers. Research, memory, planning, browser, code review, security. The capability stack." },
     { num: "02", title: "A security layer", body: "SAGE watches code for CVEs and patches them autonomously. ARGUS scouts the web for recon signals. Both built on HERMES." },
     { num: "03", title: "An interface", body: "NYX is the voice on top — local-first, multi-model, multilingual. Calls SAGE and ARGUS as tools." },
-    { num: "04", title: "An autonomous market actor", body: "MIDAS runs the whole stack overnight — discovers, validates, builds, ships consumer products end-to-end. Zero human in the loop." },
-    { num: "05", title: "And the standalone work", body: "CyberTrace for investigators. GHOST for the browser. Each its own product, each shipping value today." }
+    { num: "04", title: "And the standalone work", body: "CyberTrace for investigators. GHOST for the browser. Aegis watching the endpoint. Each its own product, each shipping value today." }
   ];
 
   useEffect(() => {
@@ -388,7 +385,7 @@ function Constellation() {
         end: "bottom bottom",
         scrub: 0.4,
         onUpdate: (self) => {
-          const s = Math.min(4, Math.floor(self.progress * 5));
+          const s = Math.min(3, Math.floor(self.progress * 4));
           setStep(s);
         }
       });
@@ -411,7 +408,7 @@ function Constellation() {
           </div>
 
           <div className="con-step-counter">
-            {String(step + 1).padStart(2, '0')} / 05
+            {String(step + 1).padStart(2, '0')} / 04
           </div>
 
           <h2 className="t-h2">{steps[step].title}</h2>
@@ -612,7 +609,7 @@ window.SAGEScene = SAGEScene;
 
 // ---- scenes-3.jsx ----
 // ============================================================
-// SCENES 3 — NYX, MIDAS, CyberTrace, HERMES
+// SCENES 3 — NYX, CyberTrace, HERMES
 // ============================================================
 
 
@@ -639,7 +636,7 @@ function NYXScene() {
   const transcripts = [
     "",
     "scan github.com/...",
-    "scan github.com/anubhavmohandas/midas for cves",
+    "scan github.com/anubhavmohandas/Aegis for cves",
     "Found 2 transitive CVEs in lodash@4.17.20. SAGE is patching now — PR will open in ~90 seconds."
   ];
 
@@ -749,68 +746,6 @@ function NYXScene() {
   );
 }
 
-// ---------- MIDAS ----------
-function MIDASScene() {
-  const rootRef = useRef(null);
-  const [step, setStep] = useState(0);
-  const D = window.PORTFOLIO_DATA.ongoing.find(p => p.id === "midas");
-
-  useEffect(() => {
-    const ctx = window.gsap.context(() => {
-      const trigger = window.ScrollTrigger.create({
-        trigger: rootRef.current,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 0.3,
-        onUpdate: (self) => setStep(Math.min(4, Math.floor(self.progress * 5.001)))
-      });
-      return () => trigger.kill();
-    }, rootRef);
-    return () => ctx.revert();
-  }, []);
-
-  return (
-    <section ref={rootRef} className="scene" id="midas" data-screen-label="07 MIDAS">
-      <div className="scene-pin">
-        <div className="scene-sidebar">
-          <div>
-            <div className="scene-eyebrow">
-              <span className="scene-codename">{D.codename}</span>
-            </div>
-            <h2 className="scene-title">{D.name}</h2>
-            <p className="t-mono" style={{ marginTop: 12, color: 'var(--accent-warm)' }}>
-              {D.expand}
-            </p>
-            <p className="scene-blurb" style={{ marginTop: 24 }}>{D.tagline}</p>
-            <div className="scene-tags">
-              {D.tags.map(t => <span key={t} className="scene-tag">{t}</span>)}
-            </div>
-          </div>
-          <a className="scene-link" href={D.link} target="_blank" rel="noreferrer">View on GitHub →</a>
-        </div>
-
-        <div className="scene-stage midas-stage">
-          <div className="scene-step-counter">
-            <span className="cur">P{step + 1}</span> / P5
-          </div>
-          {D.phases.map((p, i) => (
-            <div key={i} className={`midas-phase ${i === step ? 'active' : ''}`}>
-              <div className="midas-phase-num">{p.num}</div>
-              <div>
-                <div className="midas-phase-title">{p.title}</div>
-                <div className="midas-phase-desc">{p.desc}</div>
-              </div>
-              <div className="midas-phase-icons">
-                {p.icons.map(ic => <span key={ic}>· {ic}</span>)}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 // ---------- CyberTrace ----------
 function CyberTraceScene() {
   const rootRef = useRef(null);
@@ -836,7 +771,7 @@ function CyberTraceScene() {
   const typedLen = step === 0 ? Math.floor((Date.now() % 4000 / 4000) * inputText.length) : inputText.length;
 
   return (
-    <section ref={rootRef} className="scene" id="cybertrace" data-screen-label="08 CyberTrace">
+    <section ref={rootRef} className="scene" id="cybertrace" data-screen-label="07 CyberTrace">
       <div className="scene-pin">
         <div className="scene-sidebar">
           <div>
@@ -916,7 +851,7 @@ function HERMESScene() {
   ];
 
   return (
-    <section ref={rootRef} className="scene" id="hermes" data-screen-label="09 HERMES">
+    <section ref={rootRef} className="scene" id="hermes" data-screen-label="08 HERMES">
       <div className="scene-pin">
         <div className="scene-sidebar">
           <div>
@@ -974,7 +909,6 @@ function HERMESScene() {
 }
 
 window.NYXScene = NYXScene;
-window.MIDASScene = MIDASScene;
 window.CyberTraceScene = CyberTraceScene;
 window.HERMESScene = HERMESScene;
 
@@ -1010,7 +944,7 @@ function Completed() {
   const D = window.PORTFOLIO_DATA.completed;
 
   return (
-    <section ref={rootRef} className="completed" id="completed" data-screen-label="10 Completed">
+    <section ref={rootRef} className="completed" id="completed" data-screen-label="09 Completed">
       <div className="section-eyebrow-row">
         <div>
           <div className="eyebrow-row">
@@ -1112,6 +1046,15 @@ function CompletedCard({ project: p }) {
             </div>
           </div>
         )}
+        {p.mock === "aegis" && (
+          <video
+            className="completed-card-video"
+            src="assets/aegis-hero.mp4"
+            poster="assets/aegis-hero.jpg"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            muted autoPlay loop playsInline
+          />
+        )}
       </div>
       <div>
         <div className="t-mono" style={{ color: 'var(--accent)', fontSize: 11, letterSpacing: '0.15em' }}>
@@ -1152,7 +1095,7 @@ function Archive() {
   }, []);
 
   return (
-    <section ref={rootRef} className="archive" id="archive" data-screen-label="11 Archive">
+    <section ref={rootRef} className="archive" id="archive" data-screen-label="10 Archive">
       <div className="section-eyebrow-row">
         <div>
           <div className="eyebrow-row">
@@ -1189,66 +1132,6 @@ function Archive() {
   );
 }
 
-// ---------- Stack ----------
-function Stack() {
-  const rootRef = useRef(null);
-  const D = window.PORTFOLIO_DATA.stack;
-
-  useEffect(() => {
-    const ctx = window.gsap.context(() => {
-      const groups = rootRef.current.querySelectorAll('.stack-group');
-      groups.forEach(g => {
-        const items = g.querySelectorAll('li');
-        window.gsap.to(items, {
-          scrollTrigger: {
-            trigger: g,
-            start: "top 80%"
-          },
-          opacity: 1,
-          x: 0,
-          stagger: 0.02,
-          duration: 0.4,
-          ease: "power2.out",
-          onStart: () => items.forEach(it => it.classList.add('lit'))
-        });
-      });
-    }, rootRef);
-    return () => ctx.revert();
-  }, []);
-
-  return (
-    <section ref={rootRef} className="stack" id="stack" data-screen-label="12 Stack">
-      <div className="section-eyebrow-row">
-        <div>
-          <div className="eyebrow-row">
-            <span className="eyebrow-dot" />
-            <span className="t-hairline">005 — STACK</span>
-          </div>
-          <h2 className="t-h1" style={{ marginTop: 16, maxWidth: '14ch' }}>
-            The <span className="t-serif-italic" style={{ color: 'var(--accent-warm)' }}>inventory.</span>
-          </h2>
-        </div>
-        <div style={{ maxWidth: 320 }}>
-          <p className="t-body">
-            No icons. No badges. Just what I use, daily.
-          </p>
-        </div>
-      </div>
-
-      <div className="stack-grid">
-        {D.map(g => (
-          <div key={g.group} className="stack-group">
-            <div className="stack-group-title">{g.group}</div>
-            <ul>
-              {g.items.map(it => <li key={it}>{it}</li>)}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 // ---------- Writing ----------
 function Writing() {
   const rootRef = useRef(null);
@@ -1273,12 +1156,12 @@ function Writing() {
   }, []);
 
   return (
-    <section ref={rootRef} className="writing" id="writing" data-screen-label="13 Writing">
+    <section ref={rootRef} className="writing" id="writing" data-screen-label="11 Writing">
       <div className="section-eyebrow-row">
         <div>
           <div className="eyebrow-row">
             <span className="eyebrow-dot" />
-            <span className="t-hairline">006 — WRITING</span>
+            <span className="t-hairline">005 — WRITING</span>
           </div>
           <h2 className="t-h1" style={{ marginTop: 16, maxWidth: '14ch' }}>
             Thinking <span className="t-serif-italic" style={{ color: 'var(--accent-warm)' }}>out loud.</span>
@@ -1356,7 +1239,7 @@ function Contact() {
   ];
 
   return (
-    <section ref={rootRef} className="contact" id="contact" data-screen-label="14 Contact">
+    <section ref={rootRef} className="contact" id="contact" data-screen-label="12 Contact">
       <h2 className="contact-headline">
         <span className="word">Let's</span>{' '}
         <span className="word">build</span>{' '}
@@ -1405,7 +1288,6 @@ function Contact() {
 
 window.Completed = Completed;
 window.Archive = Archive;
-window.Stack = Stack;
 window.Writing = Writing;
 window.Contact = Contact;
 
@@ -1444,7 +1326,6 @@ function Nav({ theme, onToggleTheme }) {
     { href: 'systems', label: 'Systems' },
     { href: 'sage', label: 'SAGE' },
     { href: 'nyx', label: 'NYX' },
-    { href: 'midas', label: 'MIDAS' },
     { href: 'cybertrace', label: 'CT' },
     { href: 'hermes', label: 'HERMES' },
     { href: 'completed', label: 'Work' },
@@ -1522,7 +1403,6 @@ function JourneyTrail() {
     { id: "systems", label: "MAP" },
     { id: "sage", label: "SAGE" },
     { id: "nyx", label: "NYX" },
-    { id: "midas", label: "MIDAS" },
     { id: "cybertrace", label: "CYBERTRACE" },
     { id: "hermes", label: "HERMES" },
     { id: "completed", label: "SHIPPED" },
@@ -1701,7 +1581,7 @@ function App() {
         ]) },
         { word: "ls", action: () => runTerminal([
           "anubhav@portfolio:~$ ls projects/",
-          "sage/   nyx/    midas/   cybertrace/   hermes/",
+          "sage/   nyx/    cybertrace/   hermes/  aegis/",
           "ghost/  nyxine/ jerry/   archive/"
         ]) },
         { word: "matrix", action: () => {
@@ -1765,12 +1645,10 @@ function App() {
         <Constellation_ />
         <SAGEScene_ />
         <NYXScene_ />
-        <MIDASScene_ />
         <CyberTraceScene_ />
         <HERMESScene_ />
         <Completed_ />
         <Archive_ />
-        <Stack_ />
         <Writing_ />
         <Contact_ />
       </main>
@@ -1840,7 +1718,7 @@ function handleCommand(cmd, runTerminal) {
   const c = cmd.toLowerCase();
   const responses = {
     "whoami": ["Anubhav Mohandas", "Security + AI engineer · India"],
-    "ls": ["sage  nyx  midas  cybertrace  hermes  ghost  nyxine  jerry"],
+    "ls": ["sage  nyx  cybertrace  hermes  ghost  nyxine  jerry  aegis"],
     "help": ["whoami · ls · help · contact · matrix · clear · exit"],
     "clear": ["__CLEAR__"],
     "contact": ["anubhav.manav147@gmail.com"],
@@ -1901,12 +1779,10 @@ const Thesis_ = window.Thesis;
 const Constellation_ = window.Constellation;
 const SAGEScene_ = window.SAGEScene;
 const NYXScene_ = window.NYXScene;
-const MIDASScene_ = window.MIDASScene;
 const CyberTraceScene_ = window.CyberTraceScene;
 const HERMESScene_ = window.HERMESScene;
 const Completed_ = window.Completed;
 const Archive_ = window.Archive;
-const Stack_ = window.Stack;
 const Writing_ = window.Writing;
 const Contact_ = window.Contact;
 

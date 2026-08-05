@@ -121,7 +121,7 @@ function App() {
         ]) },
         { word: "ls", action: () => runTerminal([
           "anubhav@portfolio:~$ ls projects/",
-          "sage/   nyx/    midas/   cybertrace/   hermes/",
+          "sage/   nyx/    cybertrace/   hermes/  aegis/",
           "ghost/  nyxine/ jerry/   archive/"
         ]) },
         { word: "matrix", action: () => {
@@ -185,12 +185,10 @@ function App() {
         <Constellation_ />
         <SAGEScene_ />
         <NYXScene_ />
-        <MIDASScene_ />
         <CyberTraceScene_ />
         <HERMESScene_ />
         <Completed_ />
         <Archive_ />
-        <Stack_ />
         <Writing_ />
         <Contact_ />
       </main>
@@ -260,7 +258,7 @@ function handleCommand(cmd, runTerminal) {
   const c = cmd.toLowerCase();
   const responses = {
     "whoami": ["Anubhav Mohandas", "Security + AI engineer · India"],
-    "ls": ["sage  nyx  midas  cybertrace  hermes  ghost  nyxine  jerry"],
+    "ls": ["sage  nyx  cybertrace  hermes  ghost  nyxine  jerry  aegis"],
     "help": ["whoami · ls · help · contact · matrix · clear · exit"],
     "clear": ["__CLEAR__"],
     "contact": ["anubhav.manav147@gmail.com"],
@@ -321,12 +319,10 @@ const Thesis_ = window.Thesis;
 const Constellation_ = window.Constellation;
 const SAGEScene_ = window.SAGEScene;
 const NYXScene_ = window.NYXScene;
-const MIDASScene_ = window.MIDASScene;
 const CyberTraceScene_ = window.CyberTraceScene;
 const HERMESScene_ = window.HERMESScene;
 const Completed_ = window.Completed;
 const Archive_ = window.Archive;
-const Stack_ = window.Stack;
 const Writing_ = window.Writing;
 const Contact_ = window.Contact;
 

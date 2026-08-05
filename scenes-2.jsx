@@ -85,9 +85,9 @@ function Constellation() {
     { id: "sage",    x: 22, y: 25, label: "SAGE",    sub: "SECURITY",  group: 1 },
     { id: "argus",   x: 78, y: 25, label: "ARGUS",   sub: "RECON",     group: 1 },
     { id: "nyx",     x: 50, y: 20, label: "NYX",     sub: "INTERFACE", group: 2 },
-    { id: "midas",   x: 50, y: 82, label: "MIDAS",   sub: "AUTONOMY",  group: 3 },
-    { id: "ct",      x: 12, y: 70, label: "CYBERTRACE", sub: "OSINT",  group: 4 },
-    { id: "ghost",   x: 88, y: 70, label: "GHOST",   sub: "TOOLING",   group: 4 },
+    { id: "ct",      x: 20, y: 78, label: "CYBERTRACE", sub: "OSINT",  group: 3 },
+    { id: "ghost",   x: 55, y: 82, label: "GHOST",   sub: "TOOLING",   group: 3 },
+    { id: "aegis",   x: 85, y: 78, label: "AEGIS",   sub: "ENDPOINT", group: 3 },
   ];
 
   // Edges revealed by step
@@ -97,16 +97,13 @@ function Constellation() {
     { from: "hermes", to: "nyx",    step: 2 },
     { from: "sage",   to: "nyx",    step: 2, dashed: true },
     { from: "argus",  to: "nyx",    step: 2, dashed: true },
-    { from: "hermes", to: "midas",  step: 3 },
-    { from: "argus",  to: "midas",  step: 3, dashed: true },
   ];
 
   const steps = [
     { num: "01", title: "An engine", body: "HERMES is the foundation — 20 modules across 5 layers. Research, memory, planning, browser, code review, security. The capability stack." },
     { num: "02", title: "A security layer", body: "SAGE watches code for CVEs and patches them autonomously. ARGUS scouts the web for recon signals. Both built on HERMES." },
     { num: "03", title: "An interface", body: "NYX is the voice on top — local-first, multi-model, multilingual. Calls SAGE and ARGUS as tools." },
-    { num: "04", title: "An autonomous market actor", body: "MIDAS runs the whole stack overnight — discovers, validates, builds, ships consumer products end-to-end. Zero human in the loop." },
-    { num: "05", title: "And the standalone work", body: "CyberTrace for investigators. GHOST for the browser. Each its own product, each shipping value today." }
+    { num: "04", title: "And the standalone work", body: "CyberTrace for investigators. GHOST for the browser. Aegis watching the endpoint. Each its own product, each shipping value today." }
   ];
 
   useEffect(() => {
@@ -117,7 +114,7 @@ function Constellation() {
         end: "bottom bottom",
         scrub: 0.4,
         onUpdate: (self) => {
-          const s = Math.min(4, Math.floor(self.progress * 5));
+          const s = Math.min(3, Math.floor(self.progress * 4));
           setStep(s);
         }
       });
@@ -140,7 +137,7 @@ function Constellation() {
           </div>
 
           <div className="con-step-counter">
-            {String(step + 1).padStart(2, '0')} / 05
+            {String(step + 1).padStart(2, '0')} / 04
           </div>
 
           <h2 className="t-h2">{steps[step].title}</h2>

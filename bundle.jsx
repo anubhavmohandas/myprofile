@@ -8,90 +8,58 @@
 
 const { useEffect, useRef, useState, useLayoutEffect } = React;
 
-// ---------- Hero ----------
+// ---------- Hero (interactive character) ----------
+// Frame engine lives in hero-character.js (vanilla + rAF). React renders this
+// markup once; zone changes, frames and messages never trigger a re-render.
 function Hero() {
   const rootRef = useRef(null);
-  const headlineRef = useRef(null);
-  const subRef = useRef(null);
 
   useEffect(() => {
-    const ctx = window.gsap.context(() => {
-      const tl = window.gsap.timeline({
-        defaults: { ease: "expo.out", duration: 1.4 }
-      });
-
-      // Initial mask reveal: each .word > span translates from below
-      const wordSpans = headlineRef.current.querySelectorAll('.word > span');
-      tl.to(wordSpans, {
-        y: '0%',
-        stagger: 0.12,
-        delay: 0.2
-      });
-
-      tl.to(subRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 1.2
-      }, "-=0.6");
-
-      // Scroll out: scale + fade as section leaves
-      window.gsap.to(rootRef.current.querySelector('.hero-pin'), {
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 0.4
-        },
-        scale: 0.92,
-        opacity: 0.4,
-        ease: "none"
-      });
-    }, rootRef);
-    return () => ctx.revert();
+    if (!window.HeroCharacter || !rootRef.current) return;
+    return window.HeroCharacter.mount(rootRef.current, {
+      manifest: 'assets/hero-frames/manifest.json'
+    });
   }, []);
 
-  const D = window.PORTFOLIO_DATA;
+  const scrollToWork = (e) => {
+    const next = rootRef.current && rootRef.current.nextElementSibling;
+    if (!next) return;
+    e.preventDefault();
+    next.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   return (
-    <section ref={rootRef} className="hero" id="home" data-screen-label="01 Hero">
-      <div className="hero-pin">
-        <div className="hero-bg" />
+    <section ref={rootRef} className="hero hc" id="home" data-screen-label="01 Hero">
+      <div className="hc-bg" aria-hidden="true"><div className="hc-glow" /></div>
 
-        <div className="hero-meta-top">
-          <div className="t-mono" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ width: 6, height: 6, background: 'var(--accent)', borderRadius: '50%', boxShadow: '0 0 8px var(--accent)' }} />
-            PORTFOLIO / 2026
-          </div>
-          <div className="t-mono" style={{ textAlign: 'right' }}>
-            ANUBHAV MOHANDAS<br/>
-            <span style={{ color: 'var(--ink-3)' }}>SECURITY + AI · IN</span>
-          </div>
-        </div>
-
-        <div className="hero-headline-wrap">
-          <h1 ref={headlineRef} className="hero-headline">
-            <span className="word"><span>I&nbsp;build</span></span>{' '}
-            <span className="word"><span>autonomous</span></span>{' '}
-            <span className="word"><span className="accent">systems.</span></span>
-          </h1>
-          <p ref={subRef} className="hero-sub">
-            {D.sub}
-          </p>
-        </div>
-
-        <div className="hero-meta-bot">
-          <div className="t-mono">
-            <div style={{ color: 'var(--ink-3)' }}>NOW SHIPPING</div>
-            <div>SAGE · NYX · HERMES · AEGIS</div>
-          </div>
-          <div className="t-mono" style={{ textAlign: 'right' }}>
-            <div style={{ color: 'var(--ink-3)' }}>EST.</div>
-            <div>SECURITY 2019 · AI 2024</div>
-          </div>
-        </div>
-
-        <div className="hero-scroll-cue">scroll</div>
+      <div className="hc-stage">
+        <canvas className="hc-canvas" role="img"
+          aria-label="Illustrated Anubhav working on a laptop, who looks up and waves when you move toward the centre" />
+        <img className="hc-fallback" src="assets/portrait.png" alt="" aria-hidden="true" />
       </div>
+
+      <div className="hc-intro">
+        <p className="hc-eyebrow">Portfolio / 2026</p>
+        <h1 className="hc-name">
+          <span className="hc-first">Anubhav</span>
+          <span className="hc-last">Mohandas</span>
+        </h1>
+        <p className="hc-role">Security + AI Systems</p>
+        <p className="hc-hint">
+          <span className="hc-hint-track" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 1.5l11 5.2-4.6 1.3L6.6 12.6z" /></svg>
+          </span>
+          <span className="hc-hint-mouse">Move cursor to call me!</span>
+          <span className="hc-hint-touch">Tap me to say hi</span>
+        </p>
+      </div>
+
+      <div className="hc-message" aria-live="polite"><span className="hc-message-text" /></div>
+
+      <a className="hc-cue" href="#portrait" onClick={scrollToWork}>
+        Explore the work
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M6 1v9M2 6.5l4 4 4-4" /></svg>
+      </a>
     </section>
   );
 }
@@ -1542,7 +1510,7 @@ window.JourneyTrail = JourneyTrail;
 
 function App() {
   const [theme, setTheme] = useState(() => {
-    try { return localStorage.getItem('theme') || 'dark'; } catch (e) { return 'dark'; }
+    try { return localStorage.getItem('theme') || 'light'; } catch (e) { return 'light'; }
   });
   const [terminal, setTerminal] = useState({ open: false, log: [] });
   const [konami, setKonami] = useState(false);

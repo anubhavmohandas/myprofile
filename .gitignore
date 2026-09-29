@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# hero frame contact sheet (local tuning aid)
+tools/.hero-contact.jpg
+# raw hero source material (start frame, clips) — frames in assets/hero-frames are what ships
+hero-source/

@@ -48,13 +48,13 @@
   --bg-elev-2: #e2d6bf;
   --ink: #1a1410;            /* warm black */
   --ink-2: rgba(26, 20, 16, 0.72);
-  --ink-3: rgba(26, 20, 16, 0.46);
+  --ink-3: rgba(26, 20, 16, 0.6);
   --ink-4: rgba(26, 20, 16, 0.16);
   --rule: rgba(26, 20, 16, 0.10);
   --rule-2: rgba(26, 20, 16, 0.22);
 
   --accent: #d94a0a;         /* slightly deeper orange for contrast on light */
-  --accent-warm: #e07a2e;
+  --accent-warm: #b8560f;
   --accent-deep: #8a2e02;
   --accent-soft: rgba(217, 74, 10, 0.10);
 }
@@ -877,7 +877,7 @@ button {
   font-family: var(--f-mono);
   font-size: 10px;
   letter-spacing: 0.15em;
-  color: var(--ink);
+  color: #f3ece1;
   background: rgba(6, 8, 16, 0.8);
   backdrop-filter: blur(8px);
   padding: 6px 12px;
@@ -900,10 +900,10 @@ button {
   font-family: var(--f-mono);
   font-size: 11px;
   letter-spacing: 0.03em;
-  color: var(--ink-2);
+  color: rgba(243, 236, 225, 0.66);
   line-height: 1.5;
 }
-.sage-graph-caption span { color: var(--accent-warm); }
+.sage-graph-caption span { color: #ffa052; }
 
 .sage-pipe {
   display: grid;
@@ -1036,7 +1036,7 @@ button {
   font-family: var(--f-mono);
   font-size: 10px;
   letter-spacing: 0.15em;
-  color: var(--ink);
+  color: #f3ece1;
   background: rgba(6, 8, 16, 0.8);
   backdrop-filter: blur(8px);
   padding: 6px 12px;
@@ -3700,6 +3700,7 @@ footer {
 [data-theme="light"] .studio-over-title { color: var(--ink); }
 
 /* NowWorking widget light mode */
+[data-theme="light"] .now-row-status.shipped { color: #15803d; border-color: #15803d; background: rgba(21, 128, 61, 0.08); }
 [data-theme="light"] .now-widget,
 [data-theme="light"] .now-pill {
   background: rgba(246, 240, 228, 0.92);
@@ -3710,9 +3711,15 @@ footer {
 [data-theme="light"] .now-row-code,
 [data-theme="light"] .now-head { color: var(--ink); }
 
-/* Intro splash always dark even in light mode */
-.intro { background: #000 !important; }
-.intro .intro-name { color: #f3ece1 !important; }
+/* Intro + boot splash always dark even in light mode — scope the dark tokens to them */
+.intro, .boot-splash {
+  background: #000 !important;
+  --ink: #f3ece1;
+  --ink-2: rgba(243, 236, 225, 0.66);
+  --ink-3: rgba(243, 236, 225, 0.38);
+  --accent: #ff5e1a;
+  --accent-warm: #ffa052;
+}
 
 /* Section eyebrows visible on cream */
 [data-theme="light"] .eyebrow-dot {
@@ -3750,6 +3757,7 @@ footer {
 }
 
 /* Archive cards light mode */
+[data-theme="light"] .archive-card { background: linear-gradient(180deg, var(--bg-elev), var(--bg)); }
 [data-theme="light"] .archive-card-mock {
   background:
     radial-gradient(circle at 30% 70%, var(--accent-soft), transparent 60%),

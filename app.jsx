@@ -6,7 +6,7 @@ const { useEffect, useRef, useState } = React;
 
 function App() {
   const [theme, setTheme] = useState(() => {
-    try { return localStorage.getItem('theme') || 'dark'; } catch (e) { return 'dark'; }
+    try { return localStorage.getItem('theme') || 'light'; } catch (e) { return 'light'; }
   });
   const [terminal, setTerminal] = useState({ open: false, log: [] });
   const [konami, setKonami] = useState(false);
